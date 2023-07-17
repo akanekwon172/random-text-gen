@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ランダムテキストジェネレーター</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>ランダムテキストジェネレーター</h1>
+  </header>
+  <main>
+      <form action="#">
+        <label>基本文字</label>
+        <div class="checkbox">
+          <label><input type="checkbox" name="blocks" value="0" checked>数字</label>
+          <label><input type="checkbox" name="blocks" value="1" checked>英字(大文字)</label>
+          <label><input type="checkbox" name="blocks" value="2" checked>英字(小文字)</label>
+          <label><input type="checkbox" name="blocks" value="3">記号</label>
+        </div>
+
+
+        <label>文字数</label>
+        <input type="number" min="1" max="20" id="textLength" value=10 required pattern="^[0-9]+$" placeholder="1~20">
+        <span class="validity"></span>
+
+        <label>生成回数</label>
+        <input type="number" min="1" max="10" id="createCount" value=5 required pattern="^[0-9]+$" placeholder="1~10">
+        <span class="validity"></span>
+
+        <button id="generateButton" class="buttonRound" type="submit">生成</button>
+      </form>
+    <ul id="result"></ul>
+  </main>
+  <script src="unicode-blocks.js"></script>
+  <script src="generate.js"></script>
+</body>
+</html>
