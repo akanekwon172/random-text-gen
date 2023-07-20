@@ -1,7 +1,8 @@
 body {
-  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Helvetica Neue', Roboto, 'Segoe UI', 'BIZ UDGothic', Meiryo, -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: greenyellow;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Helvetica Neue', 'BIZ UDGothic', Meiryo, sans-serif;
+  background-color: limegreen;
   margin: 0 auto;
+  padding: 0;
 }
 
 header {
@@ -11,20 +12,29 @@ header {
   width: 100%;
 }
 
-header > h1 {
+header h1 {
   margin: 0;
+  padding: 0.5rem;
 }
 
 main {
-  width: 70%;
-  margin: 2rem auto;
+  width: 90%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: row;
 }
 
+p {
+  margin: 0;
+}
+
+
 form {
+  padding: 0.5rem;
   display: grid;
   font-size: 1.2rem;
   gap: 10px;
-  grid-template-columns: [label] 30% [input] 60% [span0] 10%;
+  grid-template-columns: [label] 30% [input] 65%;
 }
 
 form > label {
@@ -34,6 +44,22 @@ form > label {
 
 form > div > label {
   display: inline-block;
+}
+
+.checkbox label {
+  padding: 0.1em 0.5em;
+  border-radius: 0.3em;
+  cursor: pointer;
+}
+
+.checkbox label:hover {
+  background-color: #eee;
+}
+
+.checkbox [type='checkbox'] {
+  transform: scale(1.4);
+  transform-origin: right ;
+  margin-right: 0.2em;
 }
 
 form input {
@@ -76,26 +102,62 @@ form button {
 
   .buttonRound:hover {
     color: white;
-    background-color: forestgreen;
+    background-color: blue;
     cursor: pointer;
   }
 }
 
 #result {
-  letter-spacing: 0.2rem;
-  border: 2px solid black;
-  margin-top: 1rem;
-  min-height: 3rem;
+  /*   border: 2px solid black; */
+  margin: 1rem 1rem;
+  min-height: 80%;
   list-style: none;
   padding: 0;
-}
-
-#result li {
-  min-height: 1rem;
   text-align: center;
 }
 
-#result li > h3 {
+#result li {
+  line-height: 1.5rem;
+}
+
+#result li h3 {
+  letter-spacing: 0.2rem;
   margin: 1.5rem 0;
+}
+
+.left {
+  flex: 1;
+  padding: 0.5rem;
+  max-height: fit-content;
+}
+
+.right {
+  flex: 1;
+  padding: 0.5rem;
+  background: lightgreen;
+  height: 80vh;
+
   font-size: 1.5rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 928px) {
+  main {
+    flex-direction: column;
+  }
+
+  .left {
+    flex: 1;
+    padding: 0.5rem;
+    max-height: fit-content;
+  }
+
+  .right {
+    flex: 1;
+    padding: 0.5rem;
+    background: lightgreen;
+    min-height: 80vh;
+    font-size: 1.5rem;
+    text-align: center;
+  }
 }
