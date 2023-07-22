@@ -1,10 +1,11 @@
 'use strict';
 
-const checkboxList = document.querySelectorAll('input[name=blocks]');
+import { DEFAULT_BLOCKS, UNICODE_BLOCKS, randomUnicodeChar} from './unicode-blocks.js';
+
+const basicBlockList = document.querySelectorAll('input[name=blocks]');
 const textLength = document.querySelector('#textLength');
 const createCount = document.querySelector('#createCount');
 const generateButton = document.querySelector('#generateButton');
-const resultList = document.querySelector('#result');
 
 const MAX_LENGTH = 20;
 const MAX_COUNT = 10;
@@ -34,7 +35,7 @@ const toggleCheckedArray = (array, checkbox) => {
   return array;
 };
 
-checkboxList.forEach((checkbox) => {
+basicBlockList.forEach((checkbox) => {
   checkbox.addEventListener('change', () => {
     checkedArray = toggleCheckedArray(checkedArray, checkbox);
   });
@@ -45,6 +46,7 @@ generateButton.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
 
+  const resultList = document.querySelector('#result');
   const length = parseInt(textLength.value) > MAX_LENGTH ? MAX_LENGTH : textLength.value;
   const count = parseInt(createCount.value) > MAX_COUNT ? MAX_COUNT : createCount.value;
 
@@ -78,7 +80,9 @@ generateButton.addEventListener('click', (e) => {
     li.appendChild(h3);
     resultList.insertAdjacentElement('beforeend', li);
   }
+
 });
+
 
 window.addEventListener('DOMContentLoaded', () => {
   // 選択された文字種のみを checkedArray に代入

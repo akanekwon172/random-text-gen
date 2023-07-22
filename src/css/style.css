@@ -1,5 +1,8 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400&display=swap'); */
+
 body {
-  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Helvetica Neue', 'BIZ UDGothic', Meiryo, sans-serif;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Helvetica Neue',
+    'BIZ UDGothic', Meiryo, sans-serif;
   background-color: limegreen;
   margin: 0 auto;
   padding: 0;
@@ -19,6 +22,7 @@ header h1 {
 
 main {
   width: 90%;
+  height: 100vh;
   margin: 1rem auto;
   display: flex;
   flex-direction: row;
@@ -26,15 +30,31 @@ main {
 
 p {
   margin: 0;
+  text-align: center;
 }
 
+#howto {
+  background-color: lightsalmon;
+  font-weight: bold;
+  font-size: 1.4rem;
+  padding: 1rem;
+}
+
+#howto ul {
+  margin: 0;
+}
+
+#howto ul li {
+  list-style: square;
+  padding: 0.2rem;
+}
 
 form {
   padding: 0.5rem;
   display: grid;
   font-size: 1.2rem;
   gap: 10px;
-  grid-template-columns: [label] 30% [input] 65%;
+  grid-template-columns: [label] 30% [input] 60%;
 }
 
 form > label {
@@ -58,7 +78,7 @@ form > div > label {
 
 .checkbox [type='checkbox'] {
   transform: scale(1.4);
-  transform-origin: right ;
+  transform-origin: right;
   margin-right: 0.2em;
 }
 
@@ -71,46 +91,43 @@ form input:invalid:required {
   border: 2px solid red;
 }
 
-form button {
-  grid-column: 2/3;
+form #button-area {
+  grid-column: 2 / 3;
   padding: 0;
-  appearance: none;
-  cursor: pointer;
-  background-color: lightgray;
+  display: inline-flex;
+  justify-content: space-evenly;
 }
 
-.buttonRound {
-  align-items: center;
-  justify-content: center;
+.roundedButton {
+  appearance: none;
   cursor: pointer;
-  width: 100%;
-  max-width: 320px;
-  height: 64px;
-  padding: 8px 24px;
-  font-size: 1.5rem;
-  font-weight: bold;
   color: black;
+  padding: 8px 14px;
+  font-size: 1.2rem;
+  font-weight: bold;
   text-align: center;
   overflow-wrap: anywhere;
-  border-radius: 32px; /* (buttonの高さ / 2) の値 */
+  width: 45%;
+  max-width: 150px;
+  height: 50px;
+  border-radius: 20px;
 }
 
 @media (any-hover: hover) {
-  .buttonRound {
+  #generateButton {
     transition: background-color 0.2s;
   }
 
-  .buttonRound:hover {
+  #generateButton:hover {
     color: white;
     background-color: blue;
-    cursor: pointer;
   }
 }
 
 #result {
   /*   border: 2px solid black; */
   margin: 1rem 1rem;
-  min-height: 80%;
+  min-height: fit-content;
   list-style: none;
   padding: 0;
   text-align: center;
@@ -128,15 +145,14 @@ form button {
 .left {
   flex: 1;
   padding: 0.5rem;
-  max-height: fit-content;
+  height: 100%;
 }
 
 .right {
   flex: 1;
   padding: 0.5rem;
+  height: 100%;
   background: lightgreen;
-  height: 80vh;
-
   font-size: 1.5rem;
   text-align: center;
 }
@@ -157,7 +173,7 @@ form button {
     padding: 0.5rem;
     background: lightgreen;
     min-height: 80vh;
+    max-height: 80vh;
     font-size: 1.5rem;
-    text-align: center;
   }
 }
