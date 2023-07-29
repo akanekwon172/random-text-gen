@@ -18,8 +18,8 @@
           <li>チェックボックスで選択された文字種からランダムに表示します。</li>
           <li>半角文字と漢字の混合はできません。</li>
         </ul>
-        <p style="color: #0000ff;">[ 注意事項 ]</p>
-        <ul style="color: #0000ff;">
+        <p style="color: blue;">[ 注意事項 ]</p>
+        <ul style="color: blue;">
           <li>パスワード生成は想定していません。</li>
           <li>生成結果を利用する場合は自己責任でお願いします。</li>
           <li>ブラウザ環境によっては異なる文字が表示されることがあります。</li>
@@ -29,22 +29,19 @@
         <label>半角文字</label>
         <div class="checkboxList">
           <label><input type="checkbox" name="blocks" value="0" checked>数字</label>
-          <label><input type="checkbox" name="blocks" value="1" checked>アルファベット(大文字)</label>
-          <label><input type="checkbox" name="blocks" value="2" checked>アルファベット(小文字)</label>
+          <label><input type="checkbox" name="blocks" value="1" checked>アルファベット大文字</label>
+          <label><input type="checkbox" name="blocks" value="2" checked>アルファベット小文字</label>
           <label><input type="checkbox" name="blocks" value="3" checked>記号</label>
         </div>
 
         <label>漢字</label>
         <div class="checkboxList">
-          <label>
-            <input type="checkbox" name="ucblocks" value="0"><span class="tool-tip" tooltip-data="CJK統合漢字拡張A">漢字区分1</span>
-          </label>
-          <label>
-            <input type="checkbox" name="ucblocks" value="1"><span class="tool-tip" tooltip-data="CJK統合漢字">漢字区分2</span>
-          </label>
-          <label>
-            <input type="checkbox" name="ucblocks" value="2"><span class="tool-tip" tooltip-data="CJK互換漢字">漢字区分3</span>
-          </label>
+          <label><input type="checkbox" name="ucblocks" value="0">漢字区分1</label>
+          <label><input type="checkbox" name="ucblocks" value="1">漢字区分2</label>
+          <label><input type="checkbox" name="ucblocks" value="2">漢字区分3</label>
+          <label><input type="checkbox" name="ucblocks" value="3">漢字区分4</label>
+          <label><input type="checkbox" name="ucblocks" value="4">漢字区分5</label>
+          <label><input type="checkbox" name="ucblocks" value="5">漢字区分6</label>
         </div>
 
         <label>文字数 <span style="display: inline-block;">(1～20)</span></label>
@@ -52,8 +49,12 @@
 
         <label>生成回数 <span style="display: inline-block;">(1～10)</span></label>
         <input type="number" id="createCount" min="1" max="10" value=5 required pattern="^[0-9]{1,2}$" placeholder="5">
+
+        <div class="checkboxList" style="text-align: end;">
+          <label><input type="checkbox" id="shuffle" checked>シャッフル効果</label>
+        </div>
         <div id="button-area">
-          <button id="resetButton" class="roundedButton" type="submit">リセット</button>
+          <button id="resetButton" class="roundedButton" type="reset">リセット</button>
           <button id="generateButton" class="roundedButton" type="submit">生 成</button>
         </div>
       </form>
