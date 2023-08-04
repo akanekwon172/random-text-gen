@@ -1,9 +1,6 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400&display=swap'); */
-
 body {
-  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Helvetica Neue',
-    'BIZ UDGothic', Meiryo, sans-serif;
-  background-color: limegreen;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Helvetica Neue', 'BIZ UDPGothic', Meiryo, sans-serif;
+  background-color: #78c478;
   margin: 0 auto;
   padding: 0;
 }
@@ -22,22 +19,33 @@ header h1 {
 
 main {
   width: 90%;
-  height: 100vh;
-  margin: 1rem auto;
-  display: flex;
-  flex-direction: row;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(auto-fill, 340px);
+  gap: 5px;
+  align-content: start;
+}
+
+main > * {
+  padding: 0.5rem;
 }
 
 p {
-  margin: 0;
-  text-align: center;
+  margin: 0.2rem;
 }
 
 #howto {
-  background-color: lightsalmon;
+height: fit-content;
   font-weight: bold;
-  font-size: 1.4rem;
-  padding: 1rem;
+  font-size: 1.2rem;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+#howto p {
+  padding-top: 0.2rem;
 }
 
 #howto ul {
@@ -50,41 +58,44 @@ p {
 }
 
 form {
-  padding: 0.5rem;
-  display: grid;
+  grid-column: 1 / 2; /* main に対する指定 */
+  grid-row: 2 / 3;    /* main に対する指定 */
+
   font-size: 1.2rem;
+  height: fit-content;
+  display: grid;
+  justify-content: center;
   gap: 10px;
-  grid-template-columns: [label] 30% [input] 60%;
+  grid-template-columns: [label] 30% [input] 70%;
 }
 
 form > label {
   text-align: end;
+  align-self: center;
   grid-column: label;
 }
 
-form > div > label {
+.checkboxList label {
   display: inline-block;
-}
-
-.checkbox label {
-  padding: 0.1em 0.5em;
-  border-radius: 0.3em;
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.3rem;
   cursor: pointer;
 }
 
-.checkbox label:hover {
+.checkboxList label:hover {
   background-color: #eee;
 }
 
-.checkbox [type='checkbox'] {
+.checkboxList [type='checkbox'] {
   transform: scale(1.4);
-  transform-origin: right;
+  transform-origin: right bottom;
   margin-right: 0.2em;
 }
 
-form input {
+form input[type='number'] {
   font-size: 1.5rem;
   grid-column: input;
+  width: 90%;
 }
 
 form input:invalid:required {
@@ -100,80 +111,76 @@ form #button-area {
 
 .roundedButton {
   appearance: none;
+  border: none;
+  border-radius: 1vw;
   cursor: pointer;
   color: black;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+#button-area button {
   padding: 8px 14px;
   font-size: 1.2rem;
   font-weight: bold;
-  text-align: center;
-  overflow-wrap: anywhere;
   width: 45%;
   max-width: 150px;
-  height: 50px;
-  border-radius: 20px;
 }
 
 @media (any-hover: hover) {
-  #generateButton {
+  button {
     transition: background-color 0.2s;
   }
 
   #generateButton:hover {
     color: white;
-    background-color: blue;
+    background-color: #2e80e2;
+  }
+
+  #resetButton:hover {
+    color: white;
+    background-color: #868686;
   }
 }
 
 #result {
-  /*   border: 2px solid black; */
-  margin: 1rem 1rem;
-  min-height: fit-content;
   list-style: none;
+  margin: 0 1rem;
   padding: 0;
   text-align: center;
+  line-height: 1.8rem;
 }
 
 #result li {
-  line-height: 1.5rem;
+  width: 100%;
 }
 
 #result li h3 {
   letter-spacing: 0.2rem;
-  margin: 1.5rem 0;
+  margin: 1.4rem 0;
 }
 
-.left {
-  flex: 1;
+.result-area {
+  font-family: 'BIZ UDGothic', monospace;
+  grid-column: 2 / 3;
+  grid-row: 1 / span 2;
   padding: 0.5rem;
-  height: 100%;
-}
-
-.right {
-  flex: 1;
-  padding: 0.5rem;
-  height: 100%;
   background: lightgreen;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   text-align: center;
 }
 
 @media screen and (max-width: 928px) {
   main {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
-  .left {
-    flex: 1;
-    padding: 0.5rem;
-    max-height: fit-content;
-  }
-
-  .right {
-    flex: 1;
-    padding: 0.5rem;
-    background: lightgreen;
+  .result-area {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
     min-height: 80vh;
-    max-height: 80vh;
+    max-height: fit-content;
+    padding: 0.5rem;
     font-size: 1.5rem;
   }
 }

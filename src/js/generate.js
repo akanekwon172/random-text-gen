@@ -3,23 +3,23 @@
 import { BASIC_BLOCKS, UNICODE_BLOCKS, randomUnicodeChar } from './unicode-blocks.js';
 import { ShuffleEffect } from './shuffle-effect.js';
 
-const basicBlockList = document.querySelectorAll('input[name=blocks]');
-const unicodeBlockList = document.querySelectorAll('input[name=ucblocks]');
-const textLength = document.querySelector('#textLength');
-const createCount = document.querySelector('#createCount');
-const generateButton = document.querySelector('#generateButton');
-const resetButton = document.querySelector('#resetButton');
+const basicBlockList    = document.querySelectorAll('input[name=blocks]');
+const unicodeBlockList  = document.querySelectorAll('input[name=ucblocks]');
+const textLength        = document.querySelector('#textLength');
+const createCount       = document.querySelector('#createCount');
+const generateButton    = document.querySelector('#generateButton');
+const resetButton       = document.querySelector('#resetButton');
 
-const resultList = document.querySelector('#result');
+const resultList        = document.querySelector('#result');
 
-const MAX_LENGTH = 20; // 表示最大文字数
-const MAX_COUNT  = 10; // 表示最大生成回数
+const MAX_LENGTH = 20; // 表示最大文字数 (1行)
+const MAX_COUNT  = 10; // 表示最大行数
 
-let checkedArray = [];
+let checkedArray      = [];
 let checkedKanjiArray = [];
 
 /**
- * 選択された文字種からランダムに 1つ選択
+ * 選択された文字種別からランダムに 1つ選択
  * @param array
  * @returns {number}
  */
@@ -29,13 +29,13 @@ const randomBlock = (array) => Math.floor(Math.random() * array.length);
  * [漢字] ブロックが選択されたか
  * @returns {boolean}
  */
-const isKanjiBlock = () => [...unicodeBlockList].some((c) => c.checked);
+const isKanjiBlockChecked = () => [...unicodeBlockList].some((c) => c.checked);
 
 /**
- * [半角文字]と[漢字] ブロックを切り替える
+ * [漢字] ブロックが選択されたら、[半角文字] ブロックを不可にする
  */
 const toggleBlockList = () => {
-  if (isKanjiBlock()) {
+  if (isKanjiBlockChecked()) {
     [...basicBlockList].every((c) => (c.disabled = true));
   } else {
     [...basicBlockList].forEach((c) => (c.disabled = false));
@@ -43,7 +43,7 @@ const toggleBlockList = () => {
 };
 
 /**
- * 選択された文字種のみを array に更新
+ * 選択されている文字種のみを array に更新
  * @param array
  * @param checkbox
  * @returns {array}
@@ -74,6 +74,12 @@ generateButton.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
 
+  // 数字以外が入力された場合のバリデーション
+  const notBeginNumber = /^(?![0-9]).*$/g;
+  if (notBeginNumber.test(textLength.value) || notBeginNumber.test(createCount.value)) {
+    return;
+  }
+
   const length = parseInt(textLength.value) > MAX_LENGTH ? MAX_LENGTH : textLength.value;
   const count  = parseInt(createCount.value) > MAX_COUNT ? MAX_COUNT : createCount.value;
 
@@ -88,7 +94,7 @@ generateButton.addEventListener('click', (e) => {
       const bBlock = BASIC_BLOCKS[checkedArray[randomBlock(checkedArray)]];
       const uBlock = UNICODE_BLOCKS[checkedKanjiArray[randomBlock(checkedKanjiArray)]];
 
-      if (isKanjiBlock()) {
+      if (isKanjiBlockChecked()) {
         result = [...result, randomUnicodeChar(uBlock.range.from, uBlock.range.to)];
         continue;
       }
@@ -124,9 +130,8 @@ generateButton.addEventListener('click', (e) => {
 const showAnimation = () => {
   setTimeout(() => {
     const item = [];
-    const resultArray = [...document.querySelectorAll('h3')];
 
-    resultArray.forEach((header, idx) => {
+    [...document.querySelectorAll('h3')].forEach((header, idx) => {
       item[idx] = new ShuffleEffect(idx, header);
     });
 
@@ -135,7 +140,8 @@ const showAnimation = () => {
         item[entry.target.className].reset();
         if (entry.isIntersecting) {
           item[entry.target.className].intersecting = true;
-          if (isKanjiBlock()) {
+
+          if (isKanjiBlockChecked()) {
             item[entry.target.className].animate(0x4e00, 0x9fff);
           } else {
             item[entry.target.className].animate(0x21, 0x7e);
@@ -148,7 +154,6 @@ const showAnimation = () => {
 
     item.forEach((instance) => {
       observer.observe(instance.element);
-      instance.element.style.opacity = 1;
     });
   }, 10);
 };
@@ -156,6 +161,7 @@ const showAnimation = () => {
 resetButton.addEventListener('click', () => {
   [...basicBlockList].forEach((c) => (c.disabled = false));
   [...unicodeBlockList].forEach((c) => (c.checked = false));
+  checkedKanjiArray = [];
 
   textLength.value = 10;
   createCount.value = 5;
@@ -164,7 +170,6 @@ resetButton.addEventListener('click', () => {
 window.addEventListener('DOMContentLoaded', () => {
   // 選択された文字種のみを checkedArray に代入
   document.querySelectorAll('input[name=blocks]:checked').forEach((checkbox) => {
-
     checkedArray = [...checkedArray, checkbox.value];
   });
 

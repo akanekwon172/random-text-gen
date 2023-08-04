@@ -11,54 +11,52 @@
     <h1>ランダムテキストジェネレーター</h1>
   </header>
   <main>
-    <div class="left">
-      <div id="howto">
-        <p>[ 使用方法 ]</p>
-        <ul>
-          <li>チェックボックスで選択された文字種からランダムに表示します。</li>
-          <li>半角文字と漢字の混合はできません。</li>
-        </ul>
-        <p style="color: blue;">[ 注意事項 ]</p>
-        <ul style="color: blue;">
-          <li>パスワード生成は想定していません。</li>
-          <li>生成結果を利用する場合は自己責任でお願いします。</li>
-          <li>ブラウザ環境によっては異なる文字が表示されることがあります。</li>
-        </ul>
-      </div>
-      <form>
-        <label>半角文字</label>
-        <div class="checkboxList">
-          <label><input type="checkbox" name="blocks" value="0" checked>数字</label>
-          <label><input type="checkbox" name="blocks" value="1" checked>アルファベット大文字</label>
-          <label><input type="checkbox" name="blocks" value="2" checked>アルファベット小文字</label>
-          <label><input type="checkbox" name="blocks" value="3" checked>記号</label>
-        </div>
-
-        <label>漢字</label>
-        <div class="checkboxList">
-          <label><input type="checkbox" name="ucblocks" value="0">漢字区分1</label>
-          <label><input type="checkbox" name="ucblocks" value="1">漢字区分2</label>
-          <label><input type="checkbox" name="ucblocks" value="2">漢字区分3</label>
-          <label><input type="checkbox" name="ucblocks" value="3">漢字区分4</label>
-          <label><input type="checkbox" name="ucblocks" value="4">漢字区分5</label>
-          <label><input type="checkbox" name="ucblocks" value="5">漢字区分6</label>
-        </div>
-
-        <label>文字数 <span style="display: inline-block;">(1～20)</span></label>
-        <input type="number" id="textLength" min="1" max="20" value=10 required pattern="^[0-9]{1,2}$" placeholder="10">
-
-        <label>生成回数 <span style="display: inline-block;">(1～10)</span></label>
-        <input type="number" id="createCount" min="1" max="10" value=5 required pattern="^[0-9]{1,2}$" placeholder="5">
-
-        <div class="checkboxList" style="text-align: end;">
-          <label><input type="checkbox" id="shuffle" checked>シャッフル効果</label>
-        </div>
-        <div id="button-area">
-          <button id="resetButton" class="roundedButton" type="reset">リセット</button>
-          <button id="generateButton" class="roundedButton" type="submit">生 成</button>
-        </div>
-      </form>
+    <div id="howto">
+      <p>[ 使用方法 ]</p>
+      <ul>
+        <li>チェックボックスで選択された文字種別から、ランダムに表示します。</li>
+        <li>半角文字と漢字の混合はできません。</li>
+      </ul>
+      <p style="color: blue;">[ 注意事項 ]</p>
+      <ul style="color: blue;">
+        <li>パスワード生成は想定していません。</li>
+        <li>生成結果を利用する場合は自己責任でお願いします。</li>
+        <li>ブラウザ環境によっては異なる文字が表示されることがあります。</li>
+      </ul>
     </div>
+
+    <form>
+      <label>半角文字</label>
+      <div class="checkboxList">
+        <label><input type="checkbox" name="blocks" value="0" checked>数字</label>
+        <label><input type="checkbox" name="blocks" value="1" checked>アルファベット大文字</label>
+        <label><input type="checkbox" name="blocks" value="2" checked>アルファベット小文字</label>
+        <label><input type="checkbox" name="blocks" value="3" checked>記号</label>
+      </div>
+
+      <label>漢字 <span style="display: block;">
+          <button class="roundedButton modal-open" type="button"> ( 詳細はこちら ) </button>
+        </span></label>
+      <div class="checkboxList">
+        <label><input type="checkbox" name="ucblocks" value="0">漢字区分1</label>
+        <label><input type="checkbox" name="ucblocks" value="1">漢字区分2</label>
+        <label><input type="checkbox" name="ucblocks" value="2">漢字区分3</label>
+      </div>
+
+      <label>&#x3000;文字数 <span style="display: inline-block;">(1～20)</span></label>
+      <input type="number" id="textLength" min="1" max="20" value="10" required pattern="^[0-9]{1,2}$" placeholder="10">
+      <label>生成行数 <span style="display: inline-block;">(1～10)</span></label>
+      <input type="number" id="createCount" min="1" max="10" value="5" required pattern="^[0-9]{1,2}$" placeholder="5">
+
+      <div class="checkboxList" style="text-align: end;">
+        <label><input type="checkbox" id="shuffle" checked>シャッフル効果</label>
+      </div>
+      <div id="button-area">
+        <button id="resetButton" class="roundedButton" type="reset">リセット</button>
+        <button id="generateButton" class="roundedButton" type="submit">生 成</button>
+      </div>
+    </form>
+
     <div class="result-area">
       <p>[ 表示欄 ]</p>
       <ul id="result"></ul>
