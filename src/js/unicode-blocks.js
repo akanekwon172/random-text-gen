@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * ユニコードブロック (半角文字) の定義
  * @see https://www.unicode.org/roadmaps/bmp/

@@ -1,5 +1,3 @@
-'use strict';
-
 import { BASIC_BLOCKS, UNICODE_BLOCKS, randomUnicodeChar } from './unicode-blocks.js';
 import { ShuffleEffect } from './shuffle-effect.js';
 
@@ -14,9 +12,6 @@ const resultList        = document.querySelector('#result');
 
 const MAX_LENGTH = 20; // 表示最大文字数 (1行)
 const MAX_COUNT  = 10; // 表示最大行数
-
-let checkedArray      = [];
-let checkedKanjiArray = [];
 
 /**
  * 選択された文字種別からランダムに 1つ選択
@@ -42,37 +37,22 @@ const toggleBlockList = () => {
   }
 };
 
-/**
- * 選択されている文字種のみを array に更新
- * @param array
- * @param checkbox
- * @returns {array}
- */
-const toggleCheckedArray = (array, checkbox) => {
-  if (array.includes(checkbox.value)) {
-    array = [...array].filter((v) => v !== checkbox.value);
-  } else {
-    array = [...array, checkbox.value].sort();
-  }
-  return array;
-};
-
-basicBlockList.forEach((checkbox) => {
-  checkbox.addEventListener('change', () => {
-    checkedArray = toggleCheckedArray(checkedArray, checkbox);
-  });
-});
-
 unicodeBlockList.forEach((checkbox) => {
   checkbox.addEventListener('change', () => {
     toggleBlockList();
-    checkedKanjiArray = toggleCheckedArray(checkedKanjiArray, checkbox);
   });
 });
 
 generateButton.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
+
+  const selectedBlocks = [...document.querySelectorAll('input[name=blocks]:checked')].map(
+    (checkbox) => checkbox.value
+  );
+  const selectedKanjiBlocks = [...document.querySelectorAll('input[name=ucblocks]:checked')].map(
+    (checkbox) => checkbox.value
+  );
 
   // 数字以外が入力された場合のバリデーション
   const notBeginNumber = /^(?![0-9]).*$/g;
@@ -81,18 +61,19 @@ generateButton.addEventListener('click', (e) => {
   }
 
   const length = parseInt(textLength.value) > MAX_LENGTH ? MAX_LENGTH : textLength.value;
-  const count  = parseInt(createCount.value) > MAX_COUNT ? MAX_COUNT : createCount.value;
+  const count = parseInt(createCount.value) > MAX_COUNT ? MAX_COUNT : createCount.value;
 
   resultList.textContent = '';
 
   for (let j = 0; j < count; j++) {
     const li = document.createElement('li');
     const h3 = document.createElement('h3');
+
     let result = [];
 
     for (let i = 0; i < length; i++) {
-      const bBlock = BASIC_BLOCKS[checkedArray[randomBlock(checkedArray)]];
-      const uBlock = UNICODE_BLOCKS[checkedKanjiArray[randomBlock(checkedKanjiArray)]];
+      const bBlock = BASIC_BLOCKS[selectedBlocks[randomBlock(selectedBlocks)]];
+      const uBlock = UNICODE_BLOCKS[selectedKanjiBlocks[randomBlock(selectedKanjiBlocks)]];
 
       if (isKanjiBlockChecked()) {
         result = [...result, randomUnicodeChar(uBlock.range.from, uBlock.range.to)];
@@ -124,9 +105,7 @@ generateButton.addEventListener('click', (e) => {
   }
 });
 
-/**
- * シャッフル演出アニメーション
- */
+/** シャッフル演出アニメーション */
 const showAnimation = () => {
   setTimeout(() => {
     const item = [];
@@ -161,21 +140,11 @@ const showAnimation = () => {
 resetButton.addEventListener('click', () => {
   [...basicBlockList].forEach((c) => (c.disabled = false));
   [...unicodeBlockList].forEach((c) => (c.checked = false));
-  checkedKanjiArray = [];
 
   textLength.value = 10;
   createCount.value = 5;
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-  // 選択された文字種のみを checkedArray に代入
-  document.querySelectorAll('input[name=blocks]:checked').forEach((checkbox) => {
-    checkedArray = [...checkedArray, checkbox.value];
-  });
-
-  document.querySelectorAll('input[name=ucblocks]:checked').forEach((checkbox) => {
-    checkedKanjiArray = [...checkedKanjiArray, checkbox.value];
-  });
-
   toggleBlockList();
 });

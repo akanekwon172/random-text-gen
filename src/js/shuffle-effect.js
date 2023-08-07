@@ -1,5 +1,3 @@
-'use strict';
-
 import { randomUnicodeChar } from './unicode-blocks.js';
 
 /**
