@@ -14,12 +14,12 @@ class ShuffleEffect {
     this.element.className = `${id}`;
     this.originalString = element.innerText;
     this.innerHtml = '';
-    this.intersecting = false; //
     this.spans = [];
 
     this.createSpans();
   }
 
+  /* 文字列を 1文字ごとにタグで分割 */
   createSpans() {
     for (let i = 0; i < this.originalString.length; i++) {
       this.innerHtml += `<span>${this.originalString[i]}</span>`;
@@ -28,8 +28,9 @@ class ShuffleEffect {
     this.spans = [...this.element.querySelectorAll('span')];
   }
 
+  /** Unicode [from ... to] の範囲で frame 毎に randomUnicodeChar を代入 */
   animate(from, to) {
-    if (this.idx !== this.originalString.length && this.intersecting) {
+    if (this.idx !== this.originalString.length) {
       this.spans[this.idx].style.opacity = 1;
       this.spans[this.idx].style.transform = `translateX(0)`;
 
@@ -47,10 +48,11 @@ class ShuffleEffect {
     }
   }
 
+  /** 文字列を非表示状態にする */
   reset() {
     this.idx = 0;
     this.frame = 0;
-    this.intersecting = false;
+
     [...this.spans].forEach((span) => {
       span.style.opacity = 0;
       span.style.transform = `translateX(-20px)`;

@@ -3,10 +3,12 @@ import { ShuffleEffect } from './shuffle-effect.js';
 
 const basicBlockList    = document.querySelectorAll('input[name=blocks]');
 const unicodeBlockList  = document.querySelectorAll('input[name=ucblocks]');
-const textLength        = document.querySelector('#textLength');
-const createCount       = document.querySelector('#createCount');
-const generateButton    = document.querySelector('#generateButton');
-const resetButton       = document.querySelector('#resetButton');
+const incrementButtons  = document.querySelectorAll('.input-number-increment');
+const decrementButtons  = document.querySelectorAll('.input-number-decrement');
+const textLength        = document.querySelector('#text-length');
+const createCount       = document.querySelector('#create-count');
+const generateButton    = document.querySelector('#generate-button');
+const resetButton       = document.querySelector('#reset-button');
 
 const resultList        = document.querySelector('#result');
 
@@ -26,9 +28,7 @@ const randomBlock = (array) => Math.floor(Math.random() * array.length);
  */
 const isKanjiBlockChecked = () => [...unicodeBlockList].some((c) => c.checked);
 
-/**
- * [漢字] ブロックが選択されたら、[半角文字] ブロックを不可にする
- */
+/** [漢字] ブロックが選択されたら、[半角文字] ブロックを不可にする */
 const toggleBlockList = () => {
   if (isKanjiBlockChecked()) {
     [...basicBlockList].every((c) => (c.disabled = true));
@@ -43,16 +43,49 @@ unicodeBlockList.forEach((checkbox) => {
   });
 });
 
+/** Number input の カスタムスピナー */
+const customSpinner = (button, direction) => {
+  let _spinTimer;
+  const _stopSpinning = () => {
+    clearInterval(_spinTimer);
+  };
+  const _startSpinning = () => {
+    _stopSpinning();
+    _spinTimer = setInterval(() => {
+      (direction === 'inc')
+        ? button.previousElementSibling.stepUp()
+        : button.previousElementSibling.previousElementSibling.stepDown();
+    }, 200);
+  };
+
+  button.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    _startSpinning();
+  });
+  button.addEventListener('mouseup', _stopSpinning);
+  button.addEventListener('mouseleave', _stopSpinning);
+};
+
+for (const button of incrementButtons) {
+  customSpinner(button, 'inc');
+}
+
+for (const button of decrementButtons) {
+  customSpinner(button, 'dec');
+}
+
 generateButton.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
 
-  const selectedBlocks = [...document.querySelectorAll('input[name=blocks]:checked')].map(
-    (checkbox) => checkbox.value
-  );
-  const selectedKanjiBlocks = [...document.querySelectorAll('input[name=ucblocks]:checked')].map(
-    (checkbox) => checkbox.value
-  );
+  const selectedBlocks = [...document.querySelectorAll('input[name=blocks]:checked')]
+    .map((checkbox) => checkbox.value);
+  const selectedKanjiBlocks = [...document.querySelectorAll('input[name=ucblocks]:checked')]
+    .map((checkbox) => checkbox.value);
+
+  if (selectedBlocks.length === 0 && selectedKanjiBlocks.length === 0) {
+    return;
+  }
 
   // 数字以外が入力された場合のバリデーション
   const notBeginNumber = /^(?![0-9]).*$/g;
@@ -68,7 +101,6 @@ generateButton.addEventListener('click', (e) => {
   for (let j = 0; j < count; j++) {
     const li = document.createElement('li');
     const h3 = document.createElement('h3');
-
     let result = [];
 
     for (let i = 0; i < length; i++) {
@@ -82,12 +114,12 @@ generateButton.addEventListener('click', (e) => {
 
       if (bBlock.name === '記号') {
         let randomKigou = [];
-
         bBlock.range.forEach((range) => {
           randomKigou = [...randomKigou, randomUnicodeChar(range.from, range.to)];
         });
         // 複数の range からランダムに 1つ代入
         result = [...result, randomKigou[Math.floor(Math.random() * bBlock.range.length)]];
+
       } else {
         result = [...result, randomUnicodeChar(bBlock.range.from, bBlock.range.to)];
       }
@@ -108,22 +140,22 @@ generateButton.addEventListener('click', (e) => {
 /** シャッフル演出アニメーション */
 const showAnimation = () => {
   setTimeout(() => {
-    const item = [];
+    let items = [];
 
-    [...document.querySelectorAll('h3')].forEach((header, idx) => {
-      item[idx] = new ShuffleEffect(idx, header);
+    [...document.querySelectorAll('h3')].forEach((header, id) => {
+      items = [...items, new ShuffleEffect(id, header)];
     });
 
     const callback = (entries) => {
       entries.forEach((entry) => {
-        item[entry.target.className].reset();
-        if (entry.isIntersecting) {
-          item[entry.target.className].intersecting = true;
+        const id = entry.target.className;
 
+        items[id].reset();
+        if (entry.isIntersecting) {
           if (isKanjiBlockChecked()) {
-            item[entry.target.className].animate(0x4e00, 0x9fff);
+            items[id].animate(0x4e00, 0x9fff);
           } else {
-            item[entry.target.className].animate(0x21, 0x7e);
+            items[id].animate(0x21, 0x7e);
           }
         }
       });
@@ -131,15 +163,15 @@ const showAnimation = () => {
 
     const observer = new IntersectionObserver(callback, { rootMargin: '0px', threshold: 0.0 });
 
-    item.forEach((instance) => {
+    items.forEach((instance) => {
       observer.observe(instance.element);
     });
   }, 10);
 };
 
 resetButton.addEventListener('click', () => {
-  [...basicBlockList].forEach((c) => (c.disabled = false));
-  [...unicodeBlockList].forEach((c) => (c.checked = false));
+  [...basicBlockList].forEach((c) => c.disabled = false);
+  [...unicodeBlockList].forEach((c) => c.checked = false);
 
   textLength.value = 10;
   createCount.value = 5;

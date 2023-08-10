@@ -1,8 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Helvetica Neue', 'BIZ UDPGothic', Meiryo, sans-serif;
   background-color: #78c478;
-  margin: 0 auto;
-  padding: 0;
 }
 
 header {
@@ -22,34 +26,40 @@ main {
   margin: 0.5rem auto;
   padding: 0.5rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(auto-fill, 340px);
+  grid-template-columns: 0.8fr 1fr;
   gap: 5px;
   align-content: start;
+  justify-content: center;
 }
 
 main > * {
   padding: 0.5rem;
 }
 
-p {
-  margin: 0.2rem;
+.no-word-break {
+  display: inline-block;
+}
+
+div.wrapper {
+  grid-column: 1 / 2;
+  margin: 0 auto;
+  width: 100%;
 }
 
 #howto {
-height: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   font-weight: bold;
   font-size: 1.2rem;
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
+  margin: 1rem auto;
 }
 
 #howto p {
   padding-top: 0.2rem;
-}
-
-#howto ul {
-  margin: 0;
 }
 
 #howto ul li {
@@ -57,94 +67,24 @@ height: fit-content;
   padding: 0.2rem;
 }
 
-form {
-  grid-column: 1 / 2; /* main に対する指定 */
-  grid-row: 2 / 3;    /* main に対する指定 */
-
-  font-size: 1.2rem;
-  height: fit-content;
-  display: grid;
-  justify-content: center;
-  gap: 10px;
-  grid-template-columns: [label] 30% [input] 70%;
+form.gen-form {
+  margin: 1rem auto;
 }
 
-form > label {
-  text-align: end;
-  align-self: center;
-  grid-column: label;
-}
-
-.checkboxList label {
-  display: inline-block;
-  padding: 0.2rem 0.3rem;
-  border-radius: 0.3rem;
-  cursor: pointer;
-}
-
-.checkboxList label:hover {
-  background-color: #eee;
-}
-
-.checkboxList [type='checkbox'] {
-  transform: scale(1.4);
-  transform-origin: right bottom;
-  margin-right: 0.2em;
-}
-
-form input[type='number'] {
-  font-size: 1.5rem;
-  grid-column: input;
-  width: 90%;
-}
-
-form input:invalid:required {
-  border: 2px solid red;
-}
-
-form #button-area {
+.result-area {
+  font-family: ui-monospace, 'Source Code Pro', Osaka, Monaco, Menlo, Consolas, 'DejaVu Sans Mono', monospace;
   grid-column: 2 / 3;
-  padding: 0;
-  display: inline-flex;
-  justify-content: space-evenly;
-}
-
-.roundedButton {
-  appearance: none;
-  border: none;
-  border-radius: 1vw;
-  cursor: pointer;
-  color: black;
+  grid-row: 1 / span 2;
+  background: lightgreen;
+  font-size: 1.5rem;
   text-align: center;
-  overflow-wrap: anywhere;
-}
-
-#button-area button {
-  padding: 8px 14px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  width: 45%;
-  max-width: 150px;
-}
-
-@media (any-hover: hover) {
-  button {
-    transition: background-color 0.2s;
-  }
-
-  #generateButton:hover {
-    color: white;
-    background-color: #2e80e2;
-  }
-
-  #resetButton:hover {
-    color: white;
-    background-color: #868686;
-  }
 }
 
 #result {
   list-style: none;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   margin: 0 1rem;
   padding: 0;
   text-align: center;
@@ -156,18 +96,8 @@ form #button-area {
 }
 
 #result li h3 {
-  letter-spacing: 0.2rem;
-  margin: 1.4rem 0;
-}
-
-.result-area {
-  font-family: 'BIZ UDGothic', monospace;
-  grid-column: 2 / 3;
-  grid-row: 1 / span 2;
-  padding: 0.5rem;
-  background: lightgreen;
-  font-size: 1.4rem;
-  text-align: center;
+  letter-spacing: 0.3rem;
+  margin: 1.4rem auto;
 }
 
 @media screen and (max-width: 928px) {
@@ -179,8 +109,8 @@ form #button-area {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
     min-height: 80vh;
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
     max-height: fit-content;
-    padding: 0.5rem;
-    font-size: 1.5rem;
   }
 }
