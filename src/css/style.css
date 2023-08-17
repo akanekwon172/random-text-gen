@@ -47,19 +47,19 @@ div.wrapper {
 }
 
 #howto {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width:  -webkit-fit-content;
+  width:     -moz-fit-content;
+  width:          fit-content;
   height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  height:    -moz-fit-content;
+  height:         fit-content;
   font-weight: bold;
   font-size: 1.2rem;
   margin: 1rem auto;
 }
 
 #howto p {
-  padding-top: 0.2rem;
+  padding-top: 0.5rem;
 }
 
 #howto ul li {
@@ -72,7 +72,7 @@ form.gen-form {
 }
 
 .result-area {
-  font-family: ui-monospace, 'Source Code Pro', Osaka, Monaco, Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  font-family: ui-monospace, Osaka, Monaco, Menlo, Consolas, 'DejaVu Sans Mono', monospace;
   grid-column: 2 / 3;
   grid-row: 1 / span 2;
   background: lightgreen;
@@ -83,8 +83,8 @@ form.gen-form {
 #result {
   list-style: none;
   height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  height:    -moz-fit-content;
+  height:         fit-content;
   margin: 0 1rem;
   padding: 0;
   text-align: center;
@@ -110,7 +110,7 @@ form.gen-form {
     grid-row: 3 / 4;
     min-height: 80vh;
     max-height: -webkit-fit-content;
-    max-height: -moz-fit-content;
-    max-height: fit-content;
+    max-height:    -moz-fit-content;
+    max-height:         fit-content;
   }
 }

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ランダムテキストジェネレーター</title>
+  <link rel="stylesheet" href="src/css/custom-spinner.css">
   <link rel="stylesheet" href="src/css/generator-form.css">
   <link rel="stylesheet" href="src/css/style.css">
 </head>
@@ -19,10 +20,9 @@
           <li>チェックボックスで選択された文字種別から、ランダムに表示します。</li>
           <li>半角文字と漢字の混合はできません。</li>
         </ul>
-        <p style="color: #db143c;">[ 注意事項 ]</p>
-        <ul style="color: #db143c;">
+        <p style="color: #b80a37;">[ 注意事項 ]</p>
+        <ul style="color: #b80a37;">
           <li>ブラウザ環境によっては異なる文字が表示されることがあります。</li>
-          <li>パスワード生成は想定していません。</li>
           <li>生成結果を利用する場合は自己責任でお願いします。</li>
         </ul>
       </div>
@@ -37,8 +37,8 @@
         </div>
 
         <label>漢字 <span style="display: block;">
-            <button class="rounded-button modal-open" type="button">(詳細はこちら)</button>
-          </span></label>
+          <button class="rounded-button modal-open" type="button">( 詳細はこちら )</button>
+        </span></label>
         <div class="checkbox-list">
           <label><input type="checkbox" name="ucblocks" value="0">漢字区分1</label>
           <label><input type="checkbox" name="ucblocks" value="1">漢字区分2</label>
@@ -46,18 +46,11 @@
         </div>
 
         <label>文字数 <span class="no-word-break">(1～20)</span></label>
-        <div class="custom-input-number">
-          <input type="number" id="text-length" min="1" max="20" value="10" required pattern="^[0-9]{1,2}$" placeholder="10">
-          <button class="input-number-increment" type="button"></button>
-          <button class="input-number-decrement" type="button"></button>
-        </div>
-
+        <input type="number" id="text-length" min="1" max="20" value="10" required pattern="^[0-9]{1,2}$"
+          placeholder="10">
         <label>生成行数 <span class="no-word-break">(1～10)</span></label>
-        <div class="custom-input-number">
-          <input type="number" id="create-count" min="1" max="10" value="5" required pattern="^[0-9]{1,2}$" placeholder="5">
-          <button class="input-number-increment" type="button"></button>
-          <button class="input-number-decrement" type="button"></button>
-        </div>
+        <input type="number" id="create-count" min="1" max="10" value="5" required pattern="^[0-9]{1,2}$"
+          placeholder="5">
 
         <div class="checkbox-list" style="text-align: end;">
           <label><input type="checkbox" id="shuffle" checked>シャッフル<span class="no-word-break">効果</span></label>
@@ -74,7 +67,6 @@
       <ul id="result"></ul>
     </div>
   </main>
-
 
   <script src="src/js/generate.js" type="module"></script>
 </body>

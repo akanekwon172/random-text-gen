@@ -1,0 +1,70 @@
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+}
+
+.customspin-wrapper {
+  --spinner-width: 30px;
+
+  width: 90%;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+  height: 50px;
+}
+
+.customspin-wrapper input {
+  width: calc(100% - var(--spinner-width));
+  height: 100%;
+  position: relative;
+  padding: 0 10px;
+  border: none;
+  outline: none;
+}
+
+.customspin-button-inc, .customspin-button-dec {
+  background-color: white;
+  border: 0;
+  border-left: 2px solid #c0c0c0;
+  cursor: pointer;
+  display: block;
+  outline: none;
+  position: absolute;
+  width: var(--spinner-width);
+  height: 50%;
+  right: 0;
+}
+
+.customspin-button-inc {
+  border-bottom: 2px solid #c0c0c0;
+  top: 0;
+}
+
+.customspin-button-dec {
+  bottom: 0;
+}
+
+.customspin-button-inc div, .customspin-button-dec div {
+  --triangle-width: 12px;
+  background-color: #0ca6f2;
+  margin: auto;
+  width: var(--triangle-width);
+  height: calc(tan(60deg) * var(--triangle-width) / 2);
+}
+
+.customspin-button-inc div {
+  -webkit-clip-path: polygon(50% 0, 100% 100%, 0 100%);
+          clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.customspin-button-dec div {
+  -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%);
+          clip-path: polygon(0 0, 100% 0, 50% 100%);
+}

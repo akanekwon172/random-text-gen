@@ -1,12 +1,16 @@
 .gen-form {
+  --button-active: brightness(80%);
+  --button-primary: #2e80e2;
+  --standard-radius: 5px;
+
   font-size: 1.2rem;
   height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  height:    -moz-fit-content;
+  height:         fit-content;
   display: grid;
   justify-content: center;
   gap: 12px;
-  grid-template-columns: [label] 30% [input] 70%;
+  grid-template-columns: [label] 30% [input] 60%;
 }
 
 .gen-form > label {
@@ -18,7 +22,11 @@
 .checkbox-list label {
   display: inline-block;
   cursor: pointer;
-  border-radius: 0.3rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: var(--standard-radius);
   padding: 0.2rem 0.3rem;
 }
 
@@ -33,109 +41,33 @@
   transform-origin: right bottom;
 }
 
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type='number'] {
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
-
 .gen-form input[type='number'] {
   grid-column: input;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
 }
 
 .gen-form input:invalid:required {
   border: 3px solid red;
 }
 
-.custom-input-number {
-  width: 90%;
-
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-  position: relative;
-  height: 54px;
-}
-
-.custom-input-number input {
-  border: none;
-  display: inline-block;
-  height: 100%;
-  padding: 0 10px;
-  outline: none;
-  position: relative;
-  width: 100%;
-}
-
-.input-number-increment,
-.input-number-decrement {
-  background-color: white;
-  border: 0;
-  border-left: 1px solid #e6ebee;
+button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   cursor: pointer;
-  display: block;
-  outline: none;
-  position: absolute;
-  width: 28px;
-  height: 50%;
-  text-align: center;
-  right: 0;
 }
 
-.input-number-increment {
-  border-bottom: 1px solid #e6ebee;
-  top: 0;
-}
-
-.input-number-decrement {
-  bottom: 0;
-}
-
-.input-number-increment:before,
-.input-number-decrement:before {
-  --triangle: 6px;
-  content: '';
-  display: inline-block;
-  vertical-align: middle;
-  width: 0;
-  height: 0;
-  border-left: var(--triangle) solid transparent;
-  border-right: var(--triangle) solid transparent;
-}
-
-.input-number-increment:before {
-  border-bottom: var(--triangle) solid #0ca6f2;
-}
-
-.input-number-decrement:before {
-  border-top: var(--triangle) solid #0ca6f2;
-}
-
-.input-number-increment:hover:before {
-  border-bottom-color: #2e80e2;
-}
-
-.input-number-decrement:hover:before {
-  border-top-color: #2e80e2;
+.customspin-wrapper {
+  border-radius: var(--standard-radius);
 }
 
 .rounded-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   border: none;
-  border-radius: 1vw;
-  cursor: pointer;
+  border-radius: var(--standard-radius);
   color: black;
   text-align: center;
-  overflow-wrap: anywhere;
+  word-break: keep-all;
 }
 
 .gen-form .button-area {
@@ -149,9 +81,9 @@ input[type='number'] {
 .gen-form .button-area button {
   font-size: 1.2rem;
   font-weight: bold;
-  padding: 8px 14px;
+  padding: 8px 10px;
   width: 45%;
-  max-width: 150px;
+  max-width: 120px;
 }
 
 @media (any-hover: hover) {
@@ -159,14 +91,33 @@ input[type='number'] {
     transition: background-color 0.2s;
   }
 
+  .customspin-button:hover div {
+    background-color: var(--button-primary);
+  }
+
+  .customspin-button:active {
+    -webkit-filter: var(--button-active);
+            filter: var(--button-active);
+  }
+
   #generate-button:hover {
     color: white;
-    background-color: #2e80e2;
+    background-color: var(--button-primary);
   }
 
   #reset-button:hover {
     color: white;
     background-color: #868686;
+  }
+
+  #generate-button:active {
+    -webkit-filter: var(--button-active);
+            filter: var(--button-active);
+  }
+
+  #reset-button:active {
+    -webkit-filter: var(--button-active);
+            filter: var(--button-active);
   }
 }
 

@@ -1,10 +1,9 @@
 import { BASIC_BLOCKS, UNICODE_BLOCKS, randomUnicodeChar } from './unicode-blocks.js';
-import { ShuffleEffect } from './shuffle-effect.js';
+import CustomSpinner from './custom-spinner.js';
+import ShuffleEffect from './shuffle-effect.js';
 
 const basicBlockList    = document.querySelectorAll('input[name=blocks]');
 const unicodeBlockList  = document.querySelectorAll('input[name=ucblocks]');
-const incrementButtons  = document.querySelectorAll('.input-number-increment');
-const decrementButtons  = document.querySelectorAll('.input-number-decrement');
 const textLength        = document.querySelector('#text-length');
 const createCount       = document.querySelector('#create-count');
 const generateButton    = document.querySelector('#generate-button');
@@ -43,37 +42,6 @@ unicodeBlockList.forEach((checkbox) => {
   });
 });
 
-/** Number input の カスタムスピナー */
-const customSpinner = (button, direction) => {
-  let _spinTimer;
-  const _stopSpinning = () => {
-    clearInterval(_spinTimer);
-  };
-  const _startSpinning = () => {
-    _stopSpinning();
-    _spinTimer = setInterval(() => {
-      (direction === 'inc')
-        ? button.previousElementSibling.stepUp()
-        : button.previousElementSibling.previousElementSibling.stepDown();
-    }, 200);
-  };
-
-  button.addEventListener('mousedown', (e) => {
-    e.preventDefault();
-    _startSpinning();
-  });
-  button.addEventListener('mouseup', _stopSpinning);
-  button.addEventListener('mouseleave', _stopSpinning);
-};
-
-for (const button of incrementButtons) {
-  customSpinner(button, 'inc');
-}
-
-for (const button of decrementButtons) {
-  customSpinner(button, 'dec');
-}
-
 generateButton.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
@@ -94,7 +62,7 @@ generateButton.addEventListener('click', (e) => {
   }
 
   const length = parseInt(textLength.value) > MAX_LENGTH ? MAX_LENGTH : textLength.value;
-  const count = parseInt(createCount.value) > MAX_COUNT ? MAX_COUNT : createCount.value;
+  const count  = parseInt(createCount.value) > MAX_COUNT ? MAX_COUNT : createCount.value;
 
   resultList.textContent = '';
 
@@ -108,20 +76,20 @@ generateButton.addEventListener('click', (e) => {
       const uBlock = UNICODE_BLOCKS[selectedKanjiBlocks[randomBlock(selectedKanjiBlocks)]];
 
       if (isKanjiBlockChecked()) {
-        result = [...result, randomUnicodeChar(uBlock.range.from, uBlock.range.to)];
+        result = [...result, randomUnicodeChar(uBlock?.range?.from, uBlock?.range?.to)];
         continue;
       }
 
       if (bBlock.name === '記号') {
         let randomKigou = [];
-        bBlock.range.forEach((range) => {
+
+        bBlock?.range.forEach((range) => {
           randomKigou = [...randomKigou, randomUnicodeChar(range.from, range.to)];
         });
         // 複数の range からランダムに 1つ代入
         result = [...result, randomKigou[Math.floor(Math.random() * bBlock.range.length)]];
-
       } else {
-        result = [...result, randomUnicodeChar(bBlock.range.from, bBlock.range.to)];
+        result = [...result, randomUnicodeChar(bBlock?.range?.from, bBlock?.range?.to)];
       }
     }
 
@@ -170,8 +138,8 @@ const showAnimation = () => {
 };
 
 resetButton.addEventListener('click', () => {
-  [...basicBlockList].forEach((c) => c.disabled = false);
-  [...unicodeBlockList].forEach((c) => c.checked = false);
+  [...basicBlockList].forEach((c) => (c.disabled = false));
+  [...unicodeBlockList].forEach((c) => (c.checked = false));
 
   textLength.value = 10;
   createCount.value = 5;
@@ -179,4 +147,16 @@ resetButton.addEventListener('click', () => {
 
 window.addEventListener('DOMContentLoaded', () => {
   toggleBlockList();
+
+  new CustomSpinner(textLength, {
+    wrapperClass: 'customspin-wrapper',
+    min: textLength.min,
+    max: textLength.max,
+  });
+
+  new CustomSpinner(createCount, {
+    wrapperClass: 'customspin-wrapper',wrapOverflow:true,
+    min: createCount.min,
+    max: createCount.max,
+  });
 });

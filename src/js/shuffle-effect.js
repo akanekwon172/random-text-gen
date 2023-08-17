@@ -62,4 +62,4 @@ class ShuffleEffect {
   }
 }
 
-export { ShuffleEffect };
+export default ShuffleEffect;
