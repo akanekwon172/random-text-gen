@@ -14,11 +14,11 @@ header {
   color: white;
   background-color: black;
   width: 100%;
+  padding: 1rem;
 }
 
 header h1 {
   margin: 0;
-  padding: 1rem;
   font-size: 2.2rem;
 }
 
@@ -34,7 +34,11 @@ main {
 }
 
 main > * {
-  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+p{
+  margin-top: 0.5rem;
 }
 
 .text-end {
@@ -60,16 +64,11 @@ div.wrapper {
   height:         fit-content;
   font-weight: bold;
   font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-#howto p {
-  padding-top: 0.5rem;
 }
 
 #howto ul li {
   list-style: square;
-  padding: 0.2rem;
+  margin-top: 0.2rem;
 }
 
 form.gen-form {
@@ -130,7 +129,6 @@ form.gen-form {
   height:    -moz-fit-content;
   height:         fit-content;
   margin: 0 1rem;
-  padding: 0;
   text-align: center;
   line-height: 1.8rem;
 }

@@ -24,6 +24,7 @@
       -ms-user-select: none;
           user-select: none;
   border-radius: var(--standard-radius);
+  margin: 0.2rem;
   padding: 0.2rem 0.3rem;
 }
 
@@ -71,7 +72,6 @@
 .gen-form .button-area button {
   font-size: 1.4rem;
   font-weight: bold;
-  padding: 8px 10px;
   width: 45%;
   max-width: 120px;
 }

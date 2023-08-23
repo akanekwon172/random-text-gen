@@ -22,7 +22,7 @@ div.customspin-wrapper input[type='number'] {
   width: calc(100% - var(--spinner-width));
   height: 100%;
   position: relative;
-  padding: 0 10px;
+  padding: 0 0.6rem;
   border: none;
   outline: none;
 }
