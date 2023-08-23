@@ -18,7 +18,8 @@ header {
 
 header h1 {
   margin: 0;
-  padding: 0.5rem;
+  padding: 1rem;
+  font-size: 2.2rem;
 }
 
 main {
@@ -34,6 +35,10 @@ main {
 
 main > * {
   padding: 0.5rem;
+}
+
+.text-end {
+  text-align: end;
 }
 
 .no-word-break {
@@ -55,7 +60,7 @@ div.wrapper {
   height:         fit-content;
   font-weight: bold;
   font-size: 1.2rem;
-  margin: 1rem auto;
+  margin-bottom: 1rem;
 }
 
 #howto p {
@@ -69,18 +74,57 @@ div.wrapper {
 
 form.gen-form {
   margin: 1rem auto;
+  font-size: 1.4rem;
+}
+
+@media (any-hover: hover) {
+  button {
+    --button-primary: #2e80e2;
+    --button-active: #2566b5;
+
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  input[type='number'] ~ .customspin-button:hover > div {
+    background-color: var(--button-primary);
+  }
+
+  input[type='number'] ~ .customspin-button:active > div {
+    background-color: var(--button-active);
+  }
+
+  #generate-button:hover {
+    color: white;
+    background-color: var(--button-primary);
+  }
+
+  #generate-button:active {
+    background-color: var(--button-active);
+  }
+
+  #reset-button:hover {
+    color: white;
+    background-color: #868686;
+  }
+
+  #reset-button:active {
+    background-color: #6b6b6b;
+  }
 }
 
 .result-area {
-  font-family: ui-monospace, Osaka, Monaco, Menlo, Consolas, 'DejaVu Sans Mono', monospace;
   grid-column: 2 / 3;
-  grid-row: 1 / span 2;
   background: lightgreen;
   font-size: 1.5rem;
   text-align: center;
 }
 
 #result {
+  font-family: ui-monospace, Monaco, Menlo, Consolas, 'DejaVu Sans Mono', monospace;
   list-style: none;
   height: -webkit-fit-content;
   height:    -moz-fit-content;

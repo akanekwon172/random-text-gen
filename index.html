@@ -22,7 +22,7 @@
         </ul>
         <p style="color: #b80a37;">[ 注意事項 ]</p>
         <ul style="color: #b80a37;">
-          <li>ブラウザ環境によっては異なる文字が表示されることがあります。</li>
+          <li>ブラウザ環境によっては、異なる文字が表示されることがあります。</li>
           <li>生成結果を利用する場合は自己責任でお願いします。</li>
         </ul>
       </div>
@@ -36,28 +36,27 @@
           <label><input type="checkbox" name="blocks" value="3">記号</label>
         </div>
 
-        <label>漢字 <span style="display: block;">
-          <button class="rounded-button modal-open" type="button">( 詳細はこちら )</button>
-        </span></label>
+        <div class="text-end">
+          <label>漢字</label>
+          <button class="rounded-button modal-open" style="display: inline-block;" type="button">( 詳細はこちら )</button>
+        </div>
         <div class="checkbox-list">
           <label><input type="checkbox" name="ucblocks" value="0">漢字区分1</label>
           <label><input type="checkbox" name="ucblocks" value="1">漢字区分2</label>
           <label><input type="checkbox" name="ucblocks" value="2">漢字区分3</label>
         </div>
 
-        <label>文字数 <span class="no-word-break">(1～20)</span></label>
-        <input type="number" id="text-length" min="1" max="20" value="10" required pattern="^[0-9]{1,2}$"
-          placeholder="10">
+        <label>　文字数 <span class="no-word-break">(1～20)</span></label>
+        <input type="number" id="text-length" min="1" max="20" value="10" required pattern="^[0-9]{1,2}$" placeholder="10">
         <label>生成行数 <span class="no-word-break">(1～10)</span></label>
-        <input type="number" id="create-count" min="1" max="10" value="5" required pattern="^[0-9]{1,2}$"
-          placeholder="5">
+        <input type="number" id="create-count" min="1" max="10" value="5" required pattern="^[0-9]{1,2}$" placeholder="5">
 
-        <div class="checkbox-list" style="text-align: end;">
+        <div class="checkbox-list text-end">
           <label><input type="checkbox" id="shuffle" checked>シャッフル<span class="no-word-break">効果</span></label>
         </div>
         <div class="button-area">
           <button id="reset-button" class="rounded-button" type="reset">リセット</button>
-          <button id="generate-button" class="rounded-button" type="submit">生 成</button>
+          <button id="generate-button" class="rounded-button" type="submit">生　成</button>
         </div>
       </form>
     </div>

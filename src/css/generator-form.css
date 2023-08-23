@@ -1,9 +1,6 @@
 .gen-form {
-  --button-active: brightness(80%);
-  --button-primary: #2e80e2;
   --standard-radius: 5px;
 
-  font-size: 1.2rem;
   height: -webkit-fit-content;
   height:    -moz-fit-content;
   height:         fit-content;
@@ -51,15 +48,9 @@
   border: 3px solid red;
 }
 
-button {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  cursor: pointer;
-}
-
 .customspin-wrapper {
   border-radius: var(--standard-radius);
+  width: 90%;
 }
 
 .rounded-button {
@@ -73,52 +64,16 @@ button {
 .gen-form .button-area {
   grid-column: input;
   display: inline-flex;
-  padding: 0;
-  width: 95%;
+  width: 90%;
   justify-content: space-evenly;
 }
 
 .gen-form .button-area button {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   padding: 8px 10px;
   width: 45%;
   max-width: 120px;
-}
-
-@media (any-hover: hover) {
-  button {
-    transition: background-color 0.2s;
-  }
-
-  .customspin-button:hover div {
-    background-color: var(--button-primary);
-  }
-
-  .customspin-button:active {
-    -webkit-filter: var(--button-active);
-            filter: var(--button-active);
-  }
-
-  #generate-button:hover {
-    color: white;
-    background-color: var(--button-primary);
-  }
-
-  #reset-button:hover {
-    color: white;
-    background-color: #868686;
-  }
-
-  #generate-button:active {
-    -webkit-filter: var(--button-active);
-            filter: var(--button-active);
-  }
-
-  #reset-button:active {
-    -webkit-filter: var(--button-active);
-            filter: var(--button-active);
-  }
 }
 
 @media screen and (max-width: 928px) {

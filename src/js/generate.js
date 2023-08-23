@@ -107,34 +107,33 @@ generateButton.addEventListener('click', (e) => {
 
 /** シャッフル演出アニメーション */
 const showAnimation = () => {
-  setTimeout(() => {
-    let items = [];
+  let items = [];
 
-    [...document.querySelectorAll('h3')].forEach((header, id) => {
-      items = [...items, new ShuffleEffect(id, header)];
-    });
+  [...document.querySelectorAll('h3')].forEach((header, id) => {
+    items = [...items, new ShuffleEffect(id, header)];
+  });
 
-    const callback = (entries) => {
-      entries.forEach((entry) => {
-        const id = entry.target.className;
+  const callback = (entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.className;
 
-        items[id].reset();
-        if (entry.isIntersecting) {
-          if (isKanjiBlockChecked()) {
-            items[id].animate(0x4e00, 0x9fff);
-          } else {
-            items[id].animate(0x21, 0x7e);
-          }
+      items[id].reset();
+      if (entry.isIntersecting) {
+        if (isKanjiBlockChecked()) {
+          items[id].animate(0x4e00, 0x9fff);
+        } else {
+          items[id].animate(0x21, 0x7e);
         }
-      });
-    };
-
-    const observer = new IntersectionObserver(callback, { rootMargin: '0px', threshold: 0.0 });
-
-    items.forEach((instance) => {
-      observer.observe(instance.element);
+      }
     });
-  }, 10);
+  };
+
+  const observer = new IntersectionObserver(callback, { rootMargin: '0px', threshold: 0.0 });
+
+  items.forEach((instance) => {
+    observer.observe(instance.element);
+    instance.element.style.opacity = 1;
+  });
 };
 
 resetButton.addEventListener('click', () => {
@@ -148,15 +147,12 @@ resetButton.addEventListener('click', () => {
 window.addEventListener('DOMContentLoaded', () => {
   toggleBlockList();
 
-  new CustomSpinner(textLength, {
-    wrapperClass: 'customspin-wrapper',
-    min: textLength.min,
-    max: textLength.max,
-  });
-
-  new CustomSpinner(createCount, {
-    wrapperClass: 'customspin-wrapper',wrapOverflow:true,
-    min: createCount.min,
-    max: createCount.max,
+  [textLength, createCount].forEach((element) => {
+    new CustomSpinner(element, {
+      wrapperClass: 'customspin-wrapper',
+      step: 1,
+      min: element.min,
+      max: element.max,
+    });
   });
 });

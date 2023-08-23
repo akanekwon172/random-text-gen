@@ -2,7 +2,7 @@
 class CustomSpinner {
   static DEFAULTS;
 
-  #_wrapper= null;
+  #_wrapper = null;
   #_buttons = {};
   #_spinTimer = 0;
 
@@ -20,8 +20,9 @@ class CustomSpinner {
 
   build() {
     this.#_wrapper = document.createElement('div');
-    if (this.element.parentNode)
-      {this.element.parentNode.replaceChild(this.#_wrapper, this.element);}
+    if (this.element.parentNode) {
+      this.element.parentNode.replaceChild(this.#_wrapper, this.element);
+    }
 
     this.#_wrapper.appendChild(this.element);
 
@@ -33,15 +34,13 @@ class CustomSpinner {
     Object.keys(this.#_buttons).forEach((k) => {
       const b = this.#_buttons[k];
       b.appendChild(document.createElement('div'));
-      this.#_wrapper.appendChild(b);
-
       b.setAttribute('type', 'button');
       b.addEventListener('mousedown', this._onMouseDown);
       b.addEventListener('mouseup', this._onMouseUp);
       b.addEventListener('mouseleave', this._onMouseLeave);
-    });
 
-    this.element.addEventListener('keydown', this._onKeyDown);
+      this.#_wrapper.appendChild(b);
+    });
   }
 
   update(opts) {
@@ -56,15 +55,24 @@ class CustomSpinner {
       if (this.options.buttonsClass) {
         Object.keys(this.#_buttons).forEach((k) => {
           this.#_buttons[k].classList.remove(this.options.buttonsClass);
-          this.#_buttons[k].classList.remove(`${this.options.buttonsClass}-${k}`);
+          this.#_buttons[k].children[0].classList.remove(`${this.options.buttonsClass}-${k}`);
         });
       }
+
       if (opts.buttonsClass) {
         Object.keys(this.#_buttons).forEach((k) => {
           this.#_buttons[k].classList.add(opts.buttonsClass);
-          this.#_buttons[k].classList.add(`${opts.buttonsClass}-${k}`);
+          this.#_buttons[k].children[0].classList.add(`${opts.buttonsClass}-${k}`);
         });
       }
+    }
+
+    if (!opts.min || opts.min.trim().length === 0) {
+      opts.min = -Infinity;
+    }
+
+    if (!opts.max || opts.max.trim().length === 0) {
+      opts.max =  Infinity;
     }
 
     Object.assign(this.options, opts);
@@ -83,7 +91,7 @@ class CustomSpinner {
     return value;
   }
 
-  /* wrapOverflowフラグがある場合、最小値を下回ると最大値、最大値を上回ると最小値を返す */
+  /* wrapOverflow オプションが true の場合、最小値を下回ると最大値、最大値を上回ると最小値を返す */
   wrapValue(value) {
     if (this.options?.wrapOverflow && this.options?.max && this.options?.min) {
       if      (value < this.options.min) value = this.options.max;
@@ -137,7 +145,7 @@ class CustomSpinner {
   get precision() {
     return Math.max(
       ...[this.options.step, this.options?.min]
-        .filter((v) => v !== null)
+        .filter((num) => num !== Number.NaN)
         .map((num) => {
           return (String(num).split('.')[1] || '').length;
         })

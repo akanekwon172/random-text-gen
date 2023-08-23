@@ -32,7 +32,6 @@ class ShuffleEffect {
   animate(from, to) {
     if (this.idx !== this.originalString.length) {
       this.spans[this.idx].style.opacity = 1;
-      this.spans[this.idx].style.transform = `translateX(0)`;
 
       if (this.frame % 6 === 0) {
         this.spans[this.idx].innerHTML = randomUnicodeChar(from, to);
@@ -55,7 +54,6 @@ class ShuffleEffect {
 
     [...this.spans].forEach((span) => {
       span.style.opacity = 0;
-      span.style.transform = `translateX(-20px)`;
     });
 
     cancelAnimationFrame(this.#rafId);
