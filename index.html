@@ -29,7 +29,9 @@
       </div>
 
       <form class="gen-form">
-        <label>半角文字</label>
+        <div id="labelA">
+          <span>[ 半角文字 ]</span>
+        </div>
         <div class="checkbox-list">
           <label><input type="checkbox" name="blocks" value="0" checked>数字</label>
           <label><input type="checkbox" name="blocks" value="1" checked>アルファベット大文字</label>
@@ -37,23 +39,23 @@
           <label><input type="checkbox" name="blocks" value="3">記号</label>
         </div>
 
-        <span class="text-end">
-          <label>漢 字</label><br>
-          <button class="rounded-button modal-open" style="margin-top: 0.5rem;" type="button">(詳細はこちら)</button>
-        </span>
+        <div id="labelB">
+          <span>[ 漢 字 ]</span>
+          <button class="rounded-button modal-open" id="detail" type="button">(詳細はこちら)</button>
+        </div>
         <div class="checkbox-list">
           <label><input type="checkbox" name="ucblocks" value="0">漢字区分1</label>
           <label><input type="checkbox" name="ucblocks" value="1">漢字区分2</label>
           <label><input type="checkbox" name="ucblocks" value="2">漢字区分3</label>
         </div>
 
-        <label>　文字数 <span class="no-word-break">(1～20)</span></label>
+        <label id="labelC" for="text-length">　[ 文字数 ] <span class="no-word-break">(1～20)</span></label>
         <input type="number" id="text-length" min="1" max="20" value="10" required pattern="^[0-9]{1,2}$" placeholder="10">
-        <label>生成行数 <span class="no-word-break">(1～10)</span></label>
+        <label id="labelD" for="create-count">[ 生成行数 ] <span class="no-word-break">(1～10)</span></label>
         <input type="number" id="create-count" min="1" max="10" value="5" required pattern="^[0-9]{1,2}$" placeholder="5">
 
-        <div class="checkbox-list text-end">
-          <label><input type="checkbox" id="shuffle" checked>シャッフル<span class="no-word-break">効果</span></label>
+        <div id="labelE" class="checkbox-list text-end">
+          <label><input type="checkbox" id="shuffle" checked> シャッフル<span class="no-word-break">効果</span></label>
         </div>
         <div class="button-area">
           <button id="reset-button" class="rounded-button" type="reset">リセット</button>

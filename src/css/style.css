@@ -24,6 +24,7 @@ header h1 {
 
 main {
   width: 90%;
+  max-width: 1800px;
   margin: 0.5rem auto;
   padding: 0.5rem;
   display: grid;
@@ -79,13 +80,20 @@ form.gen-form {
 @media (any-hover: hover) {
   button {
     --button-primary: #2e80e2;
-    --button-active: #2566b5;
+    --button-active:  #2566b5;
 
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none;
     cursor: pointer;
     transition: background-color 0.2s;
+  }
+
+  #detail {
+    margin-top: 0.5rem;
+    color: #0000c2;
+    background-color: transparent;
+    text-decoration: underline;
   }
 
   input[type='number'] ~ .customspin-button:hover > div {

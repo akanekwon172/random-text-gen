@@ -1,5 +1,5 @@
 .gen-form {
-  --standard-radius: 5px;
+  --standard-radius: 8px;
 
   height: -webkit-fit-content;
   height:    -moz-fit-content;
@@ -7,13 +7,23 @@
   display: grid;
   justify-content: center;
   gap: 12px;
-  grid-template-columns: [label] 30% [input] 60%;
+  grid-template-columns: repeat(auto-fill, 180px calc(100% - 180px));
+  grid-auto-flow: row;
 }
 
-.gen-form > label, .gen-form > span {
-  grid-column: label;
-  align-self: center;
+#labelA, #labelB, #labelC, #labelD {
+  height: 100%;
+  background-color: #00bd0f;
+  padding: 0.2rem;
   text-align: end;
+}
+
+#labelA, #labelB {
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  justify-content: center;
 }
 
 .checkbox-list label {
@@ -23,7 +33,7 @@
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  border-radius: var(--standard-radius);
+  border-radius: 5px;
   margin: 0.2rem;
   padding: 0.1rem;
 }
@@ -40,7 +50,6 @@
 }
 
 .gen-form input[type='number'] {
-  grid-column: input;
   font-size: 2rem;
   text-align: center;
 }
@@ -63,7 +72,6 @@
 }
 
 .gen-form .button-area {
-  grid-column: input;
   display: inline-flex;
   width: 90%;
   justify-content: space-evenly;
@@ -74,9 +82,44 @@
   font-weight: bold;
   width: 45%;
   max-width: 120px;
+  padding: 0.2rem;
+}
+
+@media screen and (max-width: 1266px) {
+  .gen-form {
+    grid-template-columns: 1fr;
+  }
+
+  #labelA, #labelB, #labelC, #labelD {
+    text-align: center;
+  }
+
+  #labelA, #labelB {
+    display: block;
+  }
 }
 
 @media screen and (max-width: 928px) {
+  .gen-form {
+    grid-template-columns: repeat(auto-fill, 180px calc(100% - 180px));
+    grid-auto-flow: row;
+  }
+
+  #labelA, #labelB, #labelC, #labelD {
+    height: 100%;
+    background-color: #00b70f;
+    padding: 0.2rem;
+    text-align: end;
+  }
+
+  #labelA, #labelB {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
+  }
+
   .gen-form .button-area button {
     font-size: 1rem;
   }
