@@ -27,7 +27,7 @@ main {
   margin: 0.5rem auto;
   padding: 0.5rem;
   display: grid;
-  grid-template-columns: 0.8fr 1fr;
+  grid-template-columns: 0.45fr 0.55fr;
   gap: 5px;
   align-content: start;
   justify-content: center;
@@ -37,7 +37,7 @@ main > * {
   margin: 0.5rem;
 }
 
-p{
+p {
   margin-top: 0.5rem;
 }
 

@@ -10,7 +10,7 @@
   grid-template-columns: [label] 30% [input] 60%;
 }
 
-.gen-form > label {
+.gen-form > label, .gen-form > span {
   grid-column: label;
   align-self: center;
   text-align: end;
@@ -25,7 +25,7 @@
           user-select: none;
   border-radius: var(--standard-radius);
   margin: 0.2rem;
-  padding: 0.2rem 0.3rem;
+  padding: 0.1rem;
 }
 
 .checkbox-list label:hover {
@@ -34,7 +34,7 @@
 
 .checkbox-list input[type='checkbox'] {
   cursor: pointer;
-  margin: 0.2em;
+  margin: 0.3rem;
   transform: scale(1.4);
   transform-origin: right bottom;
 }

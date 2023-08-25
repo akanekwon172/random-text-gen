@@ -6,6 +6,7 @@
   <title>ランダムテキストジェネレーター</title>
   <link rel="stylesheet" href="src/css/custom-spinner.css">
   <link rel="stylesheet" href="src/css/generator-form.css">
+  <link rel="stylesheet" href="src/css/modal.css">
   <link rel="stylesheet" href="src/css/style.css">
 </head>
 <body>
@@ -36,10 +37,10 @@
           <label><input type="checkbox" name="blocks" value="3">記号</label>
         </div>
 
-        <div class="text-end">
-          <label>漢字</label>
-          <button class="rounded-button modal-open" style="display: inline-block;" type="button">( 詳細はこちら )</button>
-        </div>
+        <span class="text-end">
+          <label>漢 字</label><br>
+          <button class="rounded-button modal-open" style="margin-top: 0.5rem;" type="button">(詳細はこちら)</button>
+        </span>
         <div class="checkbox-list">
           <label><input type="checkbox" name="ucblocks" value="0">漢字区分1</label>
           <label><input type="checkbox" name="ucblocks" value="1">漢字区分2</label>
@@ -67,6 +68,29 @@
     </div>
   </main>
 
+  <dialog id="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>漢字区分について</h2>
+        <span class="modal-close">×</span>
+      </div>
+      <div class="modal-body">
+        <p>漢字区分は Unicode 分類を基にしています。</p>
+        <table id="unicode-blocks" class="border">
+          <thead>
+            <tr><th>区 分</th><th>Unicode 分類名</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>漢字区分1</td><td>CJK 統合漢字拡張A</td></tr>
+            <tr><td>漢字区分2</td><td>CJK 統合漢字</td></tr>
+            <tr><td>漢字区分3</td><td>CJK 互換漢字</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="src/js/modal.js"></script>
   <script src="src/js/generate.js" type="module"></script>
 </body>
 </html>
