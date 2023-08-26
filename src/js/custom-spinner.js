@@ -2,9 +2,12 @@
 class CustomSpinner {
   static DEFAULTS;
 
+  /** @type {HTMLElement} */
   #_wrapper = null;
+  /** @type {HTMLElement[]} */
   #_buttons = {};
-  #_spinTimer = 0;
+
+  #_spinTimer = null;
 
   constructor(element, opts) {
     this.element = element;

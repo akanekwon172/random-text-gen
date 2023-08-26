@@ -28,10 +28,10 @@ const UNICODE_BLOCKS = [
 ];
 
 /**
- * ランダムな文字を生成
+ * [min, max] の範囲でランダムな文字を生成
  * @param min
  * @param max
- * @returns {string}
+ * @return {string}
  */
 const randomUnicodeChar = (min = 0x21, max = 0x7e) => {
   if (min > max) [min, max] = [max, min];

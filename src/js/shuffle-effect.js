@@ -1,8 +1,6 @@
 import { randomUnicodeChar } from './unicode-blocks.js';
 
-/**
- * 文字列のシャッフルアニメーション
- */
+/** 文字列のシャッフルアニメーション */
 class ShuffleEffect {
   #rafId = null;
 

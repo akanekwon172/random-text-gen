@@ -11,19 +11,19 @@ const resetButton       = document.querySelector('#reset-button');
 
 const resultList        = document.querySelector('#result');
 
-const MAX_LENGTH = 20; // 表示最大文字数 (1行)
-const MAX_COUNT  = 10; // 表示最大行数
+const MAX_LENGTH = textLength.max  || 20; // 表示最大文字数 (1行)
+const MAX_COUNT  = createCount.max || 10; // 表示最大行数
 
 /**
  * 選択された文字種別からランダムに 1つ選択
- * @param array
- * @returns {number}
+ * @param array 選択された文字種別の配列
+ * @return {number}
  */
 const randomBlock = (array) => Math.floor(Math.random() * array.length);
 
 /**
  * [漢字] ブロックが選択されたか
- * @returns {boolean}
+ * @return {boolean}
  */
 const isKanjiBlockChecked = () => [...unicodeBlockList].some((c) => c.checked);
 
@@ -69,6 +69,8 @@ generateButton.addEventListener('click', (e) => {
   for (let j = 0; j < count; j++) {
     const li = document.createElement('li');
     const h3 = document.createElement('h3');
+
+    /** @type {String[]} */
     let result = [];
 
     for (let i = 0; i < length; i++) {
@@ -107,6 +109,8 @@ generateButton.addEventListener('click', (e) => {
 
 /** シャッフル演出アニメーション */
 const showAnimation = () => {
+
+  /** @type {ShuffleEffect[]} */
   let items = [];
 
   [...document.querySelectorAll('h3')].forEach((header, id) => {
