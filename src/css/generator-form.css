@@ -26,14 +26,17 @@
   justify-content: center;
 }
 
-.gen-form .checkbox-list, .gen-form .customspin-wrapper {
+.gen-form .checkbox-list,
+.gen-form .customspin-wrapper {
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
 }
 
 .checkbox-list label {
-  display: inline-block;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -102,15 +105,11 @@
   #labelA, #labelB {
     display: block;
   }
-
-  .gen-form .checkbox-list {
-    justify-content: space-evenly;
-  }
 }
 
 @media screen and (max-width: 928px) {
   .gen-form {
-    grid-template-columns: repeat(auto-fill, 180px calc(100% - 192px));
+    grid-template-columns: repeat(auto-fill, 150px minmax(auto, 420px));
     grid-auto-flow: row;
   }
 
