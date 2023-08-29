@@ -6,7 +6,7 @@ const basicBlockList    = document.querySelectorAll('input[name=blocks]');
 const unicodeBlockList  = document.querySelectorAll('input[name=ucblocks]');
 const textLength        = document.querySelector('#text-length');
 const createCount       = document.querySelector('#create-count');
-const generateButton    = document.querySelector('#generate-button');
+const generateForm      = document.querySelector('#gen-form');
 const resetButton       = document.querySelector('#reset-button');
 
 const resultList        = document.querySelector('#result');
@@ -42,10 +42,7 @@ unicodeBlockList.forEach((checkbox) => {
   });
 });
 
-generateButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-
+const generateResult = () => {
   const selectedBlocks = [...document.querySelectorAll('input[name=blocks]:checked')]
     .map((checkbox) => checkbox.value);
   const selectedKanjiBlocks = [...document.querySelectorAll('input[name=ucblocks]:checked')]
@@ -105,7 +102,7 @@ generateButton.addEventListener('click', (e) => {
   if (document.querySelector('#shuffle').checked) {
     showAnimation();
   }
-});
+};
 
 /** シャッフル演出アニメーション */
 const showAnimation = () => {
@@ -140,14 +137,6 @@ const showAnimation = () => {
   });
 };
 
-resetButton.addEventListener('click', () => {
-  [...basicBlockList].forEach((c) => (c.disabled = false));
-  [...unicodeBlockList].forEach((c) => (c.checked = false));
-
-  textLength.value = 10;
-  createCount.value = 5;
-});
-
 window.addEventListener('DOMContentLoaded', () => {
   toggleBlockList();
 
@@ -158,5 +147,20 @@ window.addEventListener('DOMContentLoaded', () => {
       min: element.min,
       max: element.max,
     });
+  });
+
+  resetButton.addEventListener('click', () => {
+    [...basicBlockList].forEach(c => (c.disabled = false));
+    [...unicodeBlockList].forEach(c => (c.checked = false));
+
+    textLength.value = 10;
+    createCount.value = 5;
+  });
+
+  generateForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    generateResult();
   });
 });

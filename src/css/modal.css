@@ -16,8 +16,14 @@
   border-radius: 10px;
 
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.15);
-  animation-name: show_modal;
-  animation-duration: 1s;
+  -webkit-animation-name: show_modal;
+          animation-name: show_modal;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+
+#modal-dialog::-webkit-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #modal-dialog::backdrop {
@@ -26,6 +32,15 @@
 
 .modal-open {
   padding: 0.2rem;
+}
+
+@-webkit-keyframes show_modal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes show_modal {
