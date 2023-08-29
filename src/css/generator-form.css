@@ -6,8 +6,8 @@
   height:         fit-content;
   display: grid;
   justify-content: center;
-  gap: 12px;
-  grid-template-columns: repeat(auto-fill, 180px minmax(auto, 420px));
+  gap: 8px;
+  grid-template-columns: repeat(auto-fill, 150px minmax(270px, 420px));
   grid-auto-flow: row;
 }
 
@@ -15,6 +15,7 @@
   height: 100%;
   background-color: #00bd0f;
   padding: 0.2rem;
+  border-radius: var(--standard-radius);
   text-align: end;
 }
 
@@ -109,7 +110,7 @@
 
 @media screen and (max-width: 928px) {
   .gen-form {
-    grid-template-columns: repeat(auto-fill, 150px minmax(auto, 420px));
+    grid-template-columns: repeat(auto-fill, 120px minmax(auto, 450px));
     grid-auto-flow: row;
   }
 
@@ -120,7 +121,7 @@
     text-align: end;
   }
 
-  #labelA, #labelB {
+  #labelA, #labelB, #labelC, #labelD{
     display: inline-flex;
     flex-direction: column;
     flex-wrap: wrap;

@@ -19,7 +19,6 @@ header {
 
 header h1 {
   margin: 0;
-  font-size: 2.2rem;
 }
 
 main {
@@ -76,7 +75,7 @@ div.wrapper {
 }
 
 form.gen-form {
-  margin: 1rem auto;
+  margin: 1.5rem auto;
   font-size: 1.4rem;
 }
 
@@ -129,6 +128,7 @@ form.gen-form {
 .result-area {
   grid-column: 2 / 3;
   background: lightgreen;
+  border-radius: 8px;
   font-size: 1.5rem;
   text-align: center;
 }
@@ -155,7 +155,15 @@ form.gen-form {
 
 @media screen and (max-width: 1266px) {
   main {
-    grid-template-columns: 0.3fr 0.7fr;
+    grid-template-columns: clamp(320px, 35vw, 400px) 1fr;
+  }
+
+  #howto {
+    font-size: 1rem;
+  }
+
+  form.gen-form {
+    font-size: 1rem;
   }
 }
 
