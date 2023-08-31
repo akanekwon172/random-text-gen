@@ -7,22 +7,20 @@
   display: grid;
   justify-content: center;
   gap: 8px;
-  grid-template-columns: repeat(auto-fill, 150px minmax(270px, 420px));
+  grid-template-columns: repeat(auto-fill, 150px minmax(312px, 450px));
   grid-auto-flow: row;
 }
 
-#labelA, #labelB, #labelC, #labelD {
+.form-label {
   height: 100%;
   background-color: #00bd0f;
-  padding: 0.2rem;
   border-radius: var(--standard-radius);
+  padding: 0.2rem;
   text-align: end;
-}
-
-#labelA, #labelB {
   display: inline-flex;
   flex-direction: column;
   flex-wrap: wrap;
+  gap: 0.3rem;
   align-content: flex-end;
   justify-content: center;
 }
@@ -30,11 +28,11 @@
 .gen-form .checkbox-list,
 .gen-form .customspin-wrapper {
   display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 0.3rem;
   align-items: baseline;
+  justify-content: flex-start;
 }
 
 .checkbox-list label {
@@ -44,8 +42,7 @@
       -ms-user-select: none;
           user-select: none;
   border-radius: 5px;
-  margin: 0.2rem;
-  padding: 0.1rem;
+  padding: 0.2rem;
 }
 
 .checkbox-list label:hover {
@@ -99,12 +96,8 @@
     grid-template-columns: 1fr;
   }
 
-  #labelA, #labelB, #labelC, #labelD {
-    text-align: center;
-  }
-
-  #labelA, #labelB {
-    display: block;
+  .form-label {
+    flex-flow: row;
   }
 }
 
@@ -114,19 +107,9 @@
     grid-auto-flow: row;
   }
 
-  #labelA, #labelB, #labelC, #labelD {
-    height: 100%;
-    background-color: #00b70f;
-    padding: 0.2rem;
-    text-align: end;
-  }
-
-  #labelA, #labelB, #labelC, #labelD{
-    display: inline-flex;
+  .form-label {
     flex-direction: column;
     flex-wrap: wrap;
-    align-content: flex-end;
-    justify-content: center;
   }
 
   .gen-form .checkbox-list {

@@ -27,7 +27,7 @@ main {
   margin: 0.5rem auto;
   padding: 0.5rem;
   display: grid;
-  grid-template-columns: 0.45fr 0.55fr;
+  grid-template-columns: clamp(480px, 35vw, 600px) 1fr;
   grid-auto-flow: column;
   gap: 5px 20px;
   align-content: start;
@@ -92,9 +92,9 @@ form.gen-form {
   }
 
   #detail {
-    margin-top: 0.5rem;
     color: #0000c2;
     background-color: transparent;
+    margin-left: 0.3rem;
     text-decoration: underline;
   }
 
