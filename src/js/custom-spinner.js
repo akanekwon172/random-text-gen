@@ -4,7 +4,7 @@ class CustomSpinner {
 
   /** @type {HTMLElement} */
   #_wrapper = null;
-  /** @type {HTMLElement[]} */
+  /** @type { {'inc':HTMLElement, 'dec':HTMLElement} } */
   #_buttons = {};
 
   #_spinTimer = null;
@@ -34,39 +34,40 @@ class CustomSpinner {
       dec: document.createElement('button'),
     };
 
-    Object.keys(this.#_buttons).forEach((k) => {
-      const b = this.#_buttons[k];
-      b.appendChild(document.createElement('div'));
-      b.setAttribute('type', 'button');
-      b.addEventListener('mousedown', this._onMouseDown);
-      b.addEventListener('mouseup', this._onMouseUp);
-      b.addEventListener('mouseleave', this._onMouseLeave);
+    for (const [_, button] of Object.entries(this.#_buttons)) {
+      button.appendChild(document.createElement('div'));
+      button.setAttribute('type', 'button');
+      button.addEventListener('mousedown',  this._onMouseDown);
+      button.addEventListener('mouseup',    this._onMouseUp);
+      button.addEventListener('mouseleave', this._onMouseLeave);
 
-      this.#_wrapper.appendChild(b);
-    });
+      this.#_wrapper.appendChild(button);
+    }
   }
 
   update(opts) {
     opts = { ...CustomSpinner.DEFAULTS, ...this.options, ...opts };
 
     if (opts.wrapperClass !== this.options.wrapperClass) {
-      if (this.options.wrapperClass) this.#_wrapper.classList.remove(this.options.wrapperClass);
-      if (opts.wrapperClass) this.#_wrapper.classList.add(opts.wrapperClass);
+      if (this.options.wrapperClass)
+        this.#_wrapper.classList.remove(this.options.wrapperClass);
+      if (opts.wrapperClass)
+        this.#_wrapper.classList.add(opts.wrapperClass);
     }
 
     if (opts.buttonsClass !== this.options.buttonsClass) {
       if (this.options.buttonsClass) {
-        Object.keys(this.#_buttons).forEach((k) => {
-          this.#_buttons[k].classList.remove(this.options.buttonsClass);
-          this.#_buttons[k].children[0].classList.remove(`${this.options.buttonsClass}-${k}`);
-        });
+        for (const [key, button] of Object.entries(this.#_buttons)) {
+          button.classList.remove(this.options.buttonsClass);
+          button.children[0].classList.remove(`${this.options.buttonsClass}-${key}`);
+        }
       }
 
       if (opts.buttonsClass) {
-        Object.keys(this.#_buttons).forEach((k) => {
-          this.#_buttons[k].classList.add(opts.buttonsClass);
-          this.#_buttons[k].children[0].classList.add(`${opts.buttonsClass}-${k}`);
-        });
+        for (const [key, button] of Object.entries(this.#_buttons)) {
+          button.classList.add(opts.buttonsClass);
+          button.children[0].classList.add(`${opts.buttonsClass}-${key}`);
+        }
       }
     }
 
