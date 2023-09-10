@@ -7,7 +7,7 @@
   display: grid;
   justify-content: center;
   gap: 8px;
-  grid-template-columns: repeat(auto-fill, 150px minmax(312px, 450px));
+  grid-template-columns: repeat(auto-fill, 160px minmax(320px, 480px));
   grid-auto-flow: row;
 }
 
@@ -67,6 +67,7 @@
 
 .customspin-wrapper {
   border-radius: var(--standard-radius);
+  height: 60px;
 }
 
 .rounded-button {
@@ -79,6 +80,7 @@
 
 .gen-form .button-area {
   display: inline-flex;
+  height: 60px;
   justify-content: flex-end;
 }
 
@@ -97,19 +99,30 @@
   }
 
   .form-label {
+    height: 32px;
     flex-flow: row;
+    flex-wrap: wrap;
+    align-content: center;
+  }
+
+  .form-label * {
+    font-size: 24px;
   }
 }
 
 @media screen and (max-width: 928px) {
   .gen-form {
-    grid-template-columns: repeat(auto-fill, 120px minmax(auto, 450px));
+    grid-template-columns: repeat(auto-fill, 160px minmax(auto, 480px));
     grid-auto-flow: row;
   }
 
   .form-label {
+    height: 100%;
+    text-align: end;
+    display: inline-flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
   }
 
   .gen-form .checkbox-list {
