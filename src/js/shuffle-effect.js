@@ -9,39 +9,42 @@ class ShuffleEffect {
   constructor(id, element) {
     this.id = id;
     this.element = element;
-    this.element.className = `${id}`;
     this.originalString = element.innerText;
-    this.innerHtml = '';
+
+    /** @type {HTMLElement[]} */
     this.spans = [];
 
     this.createSpans();
   }
 
-  /* 文字列を 1文字ごとにタグで分割 */
+  /** 文字列を 1文字ごとに span タグで分割 */
   createSpans() {
-    for (let i = 0; i < this.originalString.length; i++) {
-      this.innerHtml += `<span>${this.originalString[i]}</span>`;
-    }
-    this.element.innerHTML = this.innerHtml;
+    this.element.innerHTML = [...this.originalString]
+      .map((string) => `<span>${string}</span>`).join('');
+
     this.spans = [...this.element.querySelectorAll('span')];
   }
 
-  /** Unicodeの [from ... to] の範囲で frame % number 毎に randomUnicodeChar を代入 */
+  /** frame % number 毎に文字を代入 */
   animate(from, to) {
     if (this.#idNum !== this.originalString.length) {
-      this.#rafId = requestAnimationFrame(this.animate.bind(this, from, to));
-      this.spans[this.#idNum].style.opacity = 1;
+      const span = this.spans[this.#idNum];
 
+      span.style.opacity = 1;
+
+      // Unicode の [from ... to] の範囲で randomUnicodeChar を代入
       if (this.#frame % 6 === 0) {
-        this.spans[this.#idNum].innerHTML = randomUnicodeChar(from, to);
+        span.innerHTML = randomUnicodeChar(from, to);
       }
 
       if (this.#frame % 60 === 0 && this.#frame !== 0) {
-        this.spans[this.#idNum].innerHTML = this.originalString[this.#idNum];
+        span.innerHTML = this.originalString[this.#idNum];
         this.#idNum += 1;
       }
 
       this.#frame += 1;
+
+      this.#rafId = requestAnimationFrame(this.animate.bind(this, from, to));
     }
   }
 
@@ -50,7 +53,7 @@ class ShuffleEffect {
     this.#idNum = 0;
     this.#frame = 0;
 
-    [...this.spans].forEach((span) => {
+    this.spans.forEach((span) => {
       span.style.opacity = 0;
     });
 

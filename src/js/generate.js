@@ -27,12 +27,12 @@ const randomBlock = (array) => Math.floor(Math.random() * array.length);
  */
 const isKanjiBlockChecked = () => [...unicodeBlockList].some((c) => c.checked);
 
-/** [漢字] ブロックが選択されたら、[半角文字] ブロックを不可にする */
+/** [漢字] ブロックが選択されたら、[半角文字] ブロックを選択不可にする */
 const toggleBlockList = () => {
   if (isKanjiBlockChecked()) {
     [...basicBlockList].every((c) => (c.disabled = true));
   } else {
-    [...basicBlockList].forEach((c) => (c.disabled = false));
+    basicBlockList.forEach((c) => (c.disabled = false));
   }
 };
 
@@ -79,7 +79,7 @@ const generateResult = () => {
         continue;
       }
 
-      if (bBlock.name === '記号') {
+      if (bBlock.blockName === '記号') {
         let randomKigou = [];
 
         bBlock?.range.forEach((range) => {
@@ -92,9 +92,8 @@ const generateResult = () => {
       }
     }
 
-    result = [...result].join('');
-
-    h3.appendChild(document.createTextNode(result));
+    h3.appendChild(document.createTextNode([...result].join('')));
+    h3.classList.add('resultText');
     li.appendChild(h3);
     resultList.insertAdjacentElement('beforeend', li);
   }
@@ -106,20 +105,18 @@ const generateResult = () => {
 
 /** シャッフル演出アニメーション */
 const showAnimation = () => {
-
   /** @type {ShuffleEffect[]} */
   let items = [];
 
-  [...document.querySelectorAll('h3')].forEach((header, id) => {
-    items = [...items, new ShuffleEffect(id, header)];
+  document.querySelectorAll('.resultText').forEach((element, id) => {
+    items = [...items, new ShuffleEffect(id, element)];
   });
 
-  const callback = (entries) => {
-    entries.forEach((entry) => {
-      const id = entry.target.className;
-
+  const callback = (elements) => {
+    elements.forEach((element, id) => {
       items[id].reset();
-      if (entry.isIntersecting) {
+
+      if (element.isIntersecting) {
         if (isKanjiBlockChecked()) {
           items[id].animate(0x4e00, 0x9fff);
         } else {
@@ -133,7 +130,6 @@ const showAnimation = () => {
 
   items.forEach((instance) => {
     observer.observe(instance.element);
-    instance.element.style.opacity = 1;
   });
 };
 
@@ -150,8 +146,8 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   resetButton.addEventListener('click', () => {
-    [...basicBlockList].forEach(c => (c.disabled = false));
-    [...unicodeBlockList].forEach(c => (c.checked = false));
+    basicBlockList.forEach(c => (c.disabled = false));
+    unicodeBlockList.forEach(c => (c.checked = false));
 
     textLength.value = 10;
     createCount.value = 5;

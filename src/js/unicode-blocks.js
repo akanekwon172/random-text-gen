@@ -3,11 +3,11 @@
  * @see https://www.unicode.org/roadmaps/bmp/
 */
 const BASIC_BLOCKS = [
-  { name: '数字',      range: { from: 0x30, to: 0x39 }},
-  { name: '英字(大文字)', range: { from: 0x41, to: 0x5a }},
-  { name: '英字(小文字)', range: { from: 0x61, to: 0x7a }},
+  { blockName: '数字',      range: { from: 0x30, to: 0x39 }},
+  { blockName: '英字(大文字)', range: { from: 0x41, to: 0x5a }},
+  { blockName: '英字(小文字)', range: { from: 0x61, to: 0x7a }},
   {
-    name: '記号',
+    blockName: '記号',
     range: [
       { from: 0x21, to: 0x2f },
       { from: 0x3a, to: 0x40 },
@@ -22,9 +22,9 @@ const BASIC_BLOCKS = [
  * @see https://www.unicode.org/roadmaps/bmp/
  */
 const UNICODE_BLOCKS = [
-  { name: 'CJK統合漢字拡張A', range: { from: 0x3400, to: 0x4dbf }},
-  { name: 'CJK統合漢字',    range: { from: 0x4e00, to: 0x9fff }},
-  { name: 'CJK互換漢字',    range: { from: 0xf900, to: 0xfad9 }},
+  { blockName: 'CJK統合漢字拡張A', range: { from: 0x3400, to: 0x4dbf }},
+  { blockName: 'CJK統合漢字',    range: { from: 0x4e00, to: 0x9fff }},
+  { blockName: 'CJK互換漢字',    range: { from: 0xf900, to: 0xfad9 }},
 ];
 
 /**
