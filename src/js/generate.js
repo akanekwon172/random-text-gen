@@ -113,7 +113,8 @@ const showAnimation = () => {
   });
 
   const callback = (elements) => {
-    elements.forEach((element, id) => {
+    elements.forEach((element) => {
+      const id = element.target.className;
       items[id].reset();
 
       if (element.isIntersecting) {

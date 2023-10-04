@@ -9,6 +9,7 @@ class ShuffleEffect {
   constructor(id, element) {
     this.id = id;
     this.element = element;
+    this.element.className = `${id}`;
     this.originalString = element.innerText;
 
     /** @type {HTMLElement[]} */
