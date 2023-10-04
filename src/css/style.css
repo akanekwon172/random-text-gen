@@ -78,7 +78,7 @@ div.wrapper {
 
 form.gen-form {
   margin: 1.5rem auto;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 @media (any-hover: hover) {
@@ -164,10 +164,6 @@ form.gen-form {
   }
 
   #howto {
-    font-size: 1rem;
-  }
-
-  form.gen-form {
     font-size: 1rem;
   }
 }

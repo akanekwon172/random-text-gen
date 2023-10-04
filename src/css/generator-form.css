@@ -15,7 +15,7 @@
   height: 100%;
   background-color: #00bd0f;
   border-radius: var(--standard-radius);
-  padding: 0.2rem;
+  padding: 0.3rem;
   text-align: end;
   display: inline-flex;
   flex-direction: column;
@@ -52,8 +52,8 @@
 .checkbox-list input[type='checkbox'] {
   cursor: pointer;
   margin: 0.3rem;
-  width: 1.5rem;
-  height: 1.5rem;
+  width:  1.2rem;
+  height: 1.2rem;
 }
 
 .gen-form input[type='number'] {
@@ -108,16 +108,11 @@
   .form-label * {
     font-size: 24px;
   }
-
-  .checkbox-list input[type='checkbox'] {
-    width: 1rem;
-    height: 1rem;
-  }
 }
 
 @media screen and (max-width: 928px) {
   .gen-form {
-    grid-template-columns: repeat(auto-fill, 160px minmax(auto, 480px));
+    grid-template-columns: repeat(auto-fill, 180px minmax(auto, 480px));
     grid-auto-flow: row;
   }
 
